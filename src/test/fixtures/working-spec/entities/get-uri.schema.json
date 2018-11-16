@@ -1,0 +1,23 @@
+{
+  "id": "http://workingspec.com/schema/get-uri",
+  "title": "Get URI",
+  "description": "Get a URI",
+  "type": "object",
+  "format": "entity-schema",
+  "properties": {
+    "name": {
+      "$ref": "http://workingspec.com/schema/name"
+    },
+    "uri": {
+      "title": "URI",
+      "description": "The URI associated with this name",
+      "type": "string",
+      "format": "uri"
+    },
+    "isActive": {
+      "$ref": "http://workingspec.com/schema/is-active"
+    }
+  },
+  "required": [ "name", "uri" ],
+  "additionalProperties": false
+}

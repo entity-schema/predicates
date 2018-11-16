@@ -1,0 +1,1 @@
+{"version":3,"file":"subschema.js","sourceRoot":"","sources":["../src/subschema.ts"],"names":[],"mappings":";;AAAA,6CAAqD;AACrD,iDAA2D;AAI9C,QAAA,WAAW,GAAG,CAAE,KAAK,EAAwB,EAAE;IAC1D,IAAI,wBAAW,CAAE,KAAK,CAAE;QAAG,OAAO,IAAI,CAAA;IAEtC,IAAI,4BAAa,CAAE,KAAK,CAAE;QAAG,OAAO,IAAI,CAAA;IAExC,OAAO,KAAK,CAAA;AACd,CAAC,CAAA"}

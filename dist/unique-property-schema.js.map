@@ -1,0 +1,1 @@
+{"version":3,"file":"unique-property-schema.js","sourceRoot":"","sources":["../src/unique-property-schema.ts"],"names":[],"mappings":";;AAAA,iDAA2D;AAM9C,QAAA,sBAAsB,GAAG,CAAE,KAAK,EAAmC,EAAE;IAChF,IAAI,CAAC,4BAAa,CAAE,KAAK,CAAE;QAAG,OAAO,KAAK,CAAA;IAE1C,IAAI,KAAK,CAAC,SAAS,KAAK,IAAI;QAAG,OAAO,KAAK,CAAA;IAE3C,OAAO,IAAI,CAAA;AACb,CAAC,CAAA"}

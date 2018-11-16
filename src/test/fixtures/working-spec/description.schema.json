@@ -1,0 +1,10 @@
+{
+  "id": "http://workingspec.com/schema/description",
+  "title": "Description",
+  "description": "Full description of this entity.",
+  "type": "string",
+  "format": "multiline",
+  "minLength": 0,
+  "maxLength": 512,
+  "message": "Description cannot be longer than 512 characters."
+}

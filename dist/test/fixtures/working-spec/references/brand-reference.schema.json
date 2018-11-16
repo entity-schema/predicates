@@ -1,0 +1,23 @@
+{
+    "id": "http://workingspec.com/schema/brand-reference",
+    "title": "Brand Reference",
+    "description": "Links to a Brand",
+    "type": "object",
+    "properties": {
+        "entityId": {
+            "title": "Brand",
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "message": "Brand must be a 24 character hex string. (0-9, a-f)"
+        },
+        "entityType": {
+            "title": "Entity Type",
+            "type": "string",
+            "enum": ["Brand"],
+            "readOnly": true,
+            "default": "Brand"
+        }
+    },
+    "required": ["entityId", "entityType"],
+    "additionalProperties": false
+}

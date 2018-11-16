@@ -1,0 +1,46 @@
+{
+    "id": "http://workingspec.com/schema/detail",
+    "title": "Detail",
+    "description": "Details of a building product.",
+    "type": "object",
+    "format": "entity-schema",
+    "_esParentKey": "product",
+    "properties": {
+        "name": {
+            "$ref": "http://workingspec.com/schema/name"
+        },
+        "product": {
+            "$ref": "http://workingspec.com/schema/product-reference"
+        },
+        "isActive": {
+            "$ref": "http://workingspec.com/schema/is-active"
+        },
+        "abbrev": {
+            "$ref": "http://workingspec.com/schema/abbreviation"
+        },
+        "detailRef": {
+            "$ref": "http://workingspec.com/schema/detail-reference"
+        },
+        "zipFile": {
+            "$ref": "http://workingspec.com/schema/zip-file-reference"
+        },
+        "description": {
+            "$ref": "http://workingspec.com/schema/description"
+        },
+        "isPrivate": {
+            "title": "Is Private?",
+            "description": "Is this detail currently private?",
+            "type": "boolean",
+            "default": false
+        },
+        "tags": {
+            "title": "Tags",
+            "type": "array",
+            "items": {
+                "$ref": "http://workingspec.com/schema/tag"
+            }
+        }
+    },
+    "required": ["name", "product", "abbrev", "detailRef", "zipFile"],
+    "additionalProperties": false
+}

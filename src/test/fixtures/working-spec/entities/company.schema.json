@@ -1,0 +1,33 @@
+{
+  "id": "http://workingspec.com/schema/company",
+  "title": "Company",
+  "description": "A company or organisation.",
+  "type": "object",
+  "format": "entity-schema",
+  "properties": {
+    "name": {
+      "$ref": "http://workingspec.com/schema/name"
+    },
+    "isActive": {
+      "$ref": "http://workingspec.com/schema/is-active"
+    },
+    "abbrev": {
+      "$ref": "http://workingspec.com/schema/abbreviation"
+    },
+    "description": {
+      "$ref": "http://workingspec.com/schema/description"
+    },
+    "tags": {
+      "title": "Tags",
+      "type": "array",
+      "items": {
+        "$ref": "http://workingspec.com/schema/tag"
+      }
+    },
+    "logo": {
+      "$ref": "http://workingspec.com/schema/image-file-reference"
+    }
+  },
+  "required": [ "name", "abbrev", "logo" ],
+  "additionalProperties": false
+}

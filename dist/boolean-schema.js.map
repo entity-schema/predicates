@@ -1,0 +1,1 @@
+{"version":3,"file":"boolean-schema.js","sourceRoot":"","sources":["../src/boolean-schema.ts"],"names":[],"mappings":";;AAAA,iDAA2D;AAM9C,QAAA,eAAe,GAAG,CAAE,KAAK,EAA2B,EAAE;IACjE,IAAI,CAAC,4BAAa,CAAE,KAAK,CAAE;QAAG,OAAO,KAAK,CAAA;IAE1C,IAAK,KAAK,CAAC,IAAI,KAAK,SAAS;QAAG,OAAO,KAAK,CAAA;IAE5C,OAAO,IAAI,CAAA;AACb,CAAC,CAAA"}

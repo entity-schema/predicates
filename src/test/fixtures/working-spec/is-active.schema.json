@@ -1,0 +1,8 @@
+{
+  "id": "http://workingspec.com/schema/is-active",
+  "title": "Is Active?",
+  "description": "Is this entity currently in use?",
+  "type": "boolean",
+  "default": true,
+  "readOnly": true
+}

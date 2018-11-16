@@ -1,0 +1,34 @@
+{
+  "id": "http://workingspec.com/schema/brand",
+  "title": "Brand",
+  "description": "A brand or product category.",
+  "type": "object",
+  "format": "entity-schema",
+  "_esParentKey": "company",
+  "properties": {
+    "name": {
+      "$ref": "http://workingspec.com/schema/name"
+    },
+    "company": {
+      "$ref": "http://workingspec.com/schema/company-reference"
+    },
+    "isActive": {
+      "$ref": "http://workingspec.com/schema/is-active"
+    },
+    "abbrev": {
+      "$ref": "http://workingspec.com/schema/abbreviation"
+    },
+    "description": {
+      "$ref": "http://workingspec.com/schema/description"
+    },
+    "tags": {
+      "title": "Tags",
+      "type": "array",
+      "items": {
+        "$ref": "http://workingspec.com/schema/tag"
+      }
+    }
+  },
+  "required": [ "name", "company", "abbrev" ],
+  "additionalProperties": false
+}

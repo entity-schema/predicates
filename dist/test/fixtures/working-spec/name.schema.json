@@ -1,0 +1,10 @@
+{
+    "id": "http://workingspec.com/schema/name",
+    "title": "Name",
+    "description": "Name of this entity.",
+    "type": "string",
+    "minLength": 1,
+    "maxLength": 50,
+    "message": "Name must be at least 1 and not longer than 50 characters.",
+    "_esUnique": true
+}

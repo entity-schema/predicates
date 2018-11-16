@@ -1,0 +1,23 @@
+{
+    "id": "http://workingspec.com/schema/product-reference",
+    "title": "Product Reference",
+    "description": "Links to a Product",
+    "type": "object",
+    "properties": {
+        "entityId": {
+            "title": "Product",
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "message": "Product must be a 24 character hex string. (0-9, a-f)"
+        },
+        "entityType": {
+            "title": "Entity Type",
+            "type": "string",
+            "enum": ["Product"],
+            "readOnly": true,
+            "default": "Product"
+        }
+    },
+    "required": ["entityId", "entityType"],
+    "additionalProperties": false
+}

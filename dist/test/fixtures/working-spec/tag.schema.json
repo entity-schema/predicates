@@ -1,0 +1,8 @@
+{
+    "id": "http://workingspec.com/schema/tag",
+    "title": "Tag",
+    "description": "A tag to categorise and group this entity.",
+    "type": "string",
+    "pattern": "^[\\w\\-\\& ]{0,25}$",
+    "message": "Tag restricts characters and cannot be longer than 25 characters."
+}

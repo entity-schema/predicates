@@ -1,0 +1,23 @@
+{
+    "id": "http://workingspec.com/schema/company-reference",
+    "title": "Company Reference",
+    "description": "Links to a Company",
+    "type": "object",
+    "properties": {
+        "entityId": {
+            "title": "Company",
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "message": "Company must be a 24 character hex string. (0-9, a-f)"
+        },
+        "entityType": {
+            "title": "Entity Type",
+            "type": "string",
+            "enum": ["Company"],
+            "readOnly": true,
+            "default": "Company"
+        }
+    },
+    "required": ["entityId", "entityType"],
+    "additionalProperties": false
+}
