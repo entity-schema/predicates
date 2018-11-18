@@ -1,3 +1,4 @@
+import * as assert from 'assert'
 import { ObjectSchema, isObjectSchema } from './object-schema'
 import { StringSchema, isStringSchema } from './string-schema'
 import { ConstPropertySchema, isConstPropertySchema } from './const-property-schema'
@@ -17,4 +18,8 @@ export const isEntityReferenceSchema = ( value ) : value is EntityReferenceSchem
   if( !isConstPropertySchema( value.properties.entityType ) ) return false
 
   return true
+}
+
+export const assertEntityReferenceSchema = value => {
+  assert
 }

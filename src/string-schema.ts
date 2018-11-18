@@ -11,3 +11,4 @@ export const isStringSchema = ( value ): value is StringSchema => {
 
   return true
 }
+
