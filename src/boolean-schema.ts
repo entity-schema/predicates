@@ -1,4 +1,4 @@
-import { TypedSchema, isTypedSchema } from './typed-schema'
+import { TypedSchema, assertTypedSchema } from './typed-schema'
 import * as assert from 'assert'
 
 export interface BooleanSchema extends TypedSchema {
@@ -8,14 +8,14 @@ export interface BooleanSchema extends TypedSchema {
 export const isBooleanSchema = ( value ): value is BooleanSchema => {
   try {
     assertBooleanSchema( value )
-
-    return true
   } catch {
     return false
   }
+
+  return true
 }
 
 export const assertBooleanSchema = booleanSchema => {
-  assert( isTypedSchema( booleanSchema ), 'BooleanSchema should be a TypedSchema' )
+  assertTypedSchema( booleanSchema )
   assert.strictEqual( booleanSchema.type, 'boolean', `BooleanSchema.type should be 'boolean'` )
 }

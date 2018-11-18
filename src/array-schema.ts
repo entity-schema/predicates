@@ -1,5 +1,5 @@
-import { Subschema, isSubschema } from './subschema'
-import { TypedSchema, isTypedSchema } from './typed-schema'
+import { Subschema, assertSubschema } from './subschema'
+import { TypedSchema, assertTypedSchema } from './typed-schema'
 import * as assert from 'assert'
 
 export interface ArraySchema extends TypedSchema {
@@ -10,18 +10,18 @@ export interface ArraySchema extends TypedSchema {
 export const isArraySchema = ( value ): value is ArraySchema => {
   try {
     assertArraySchema( value )
-
-    return true
   } catch {
     return false
   }
+
+  return true
 }
 
 export const assertArraySchema = arraySchema => {
-  assert( isTypedSchema( arraySchema ), 'ArraySchema should be a TypedSchema' )
+  assertTypedSchema( arraySchema )
   assert.strictEqual( arraySchema.type, 'array', `ArraySchema.type should be 'array'` )
 
   if ( arraySchema.items ){
-    assert( isSubschema( arraySchema.items ), 'ArraySchema.items should be a SubSchema' )
+    assertSubschema( arraySchema.items )
   }
 }

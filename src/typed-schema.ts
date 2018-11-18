@@ -1,6 +1,6 @@
+import * as assert from 'assert'
 import { JSONSchema4 } from 'json-schema'
 import { is } from '@mojule/is'
-import * as assert from 'assert'
 
 export type TypedSchemaType = 'string' | 'number' | 'integer' | 'boolean' | 'object' | 'array'
 
@@ -16,15 +16,20 @@ const schemaTypes = [
 export const isTypedSchema = ( value ) : value is TypedSchema => {
   try {
     assertTypedSchema( value )
-
-    return true
   } catch {
     return false
   }
+
+  return true
 }
 
-export const assertTypedSchema = value => {
-  assert( is.object( value ), 'TypedSchema should be an object' )
-  assert( is.string( value.title ), 'TypedSchema should have a string title property' )
-  assert( schemaTypes.includes( value.type ), `TypedSchema type property should be one of ${ schemaTypes }` )
+export const assertTypedSchema = typedSchema => {
+  assert( is.object( typedSchema ), 'TypedSchema should be an object' )
+  assert( is.string( typedSchema.title ) && typedSchema.title.trim() !== '', 'TypedSchema.title should be a non-empty string' )
+  assert( schemaTypes.includes( typedSchema.type ), `TypedSchema type property should be one of ${ JSON.stringify( schemaTypes ) }` )
+}
+
+export const assertTypedSchemaOf = ( typedSchema, type: TypedSchemaType ) => {
+  assertTypedSchema( typedSchema )
+  assert.strictEqual( typedSchema.type, type, `TypedSchema.type should be '${ type }'` )
 }

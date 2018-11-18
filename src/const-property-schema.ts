@@ -22,3 +22,7 @@ export const isConstPropertySchema = ( value ) : value is ConstPropertySchema =>
 
   return true
 }
+
+export const assertConstPropertySchema = value => {
+
+}
