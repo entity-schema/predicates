@@ -1,0 +1,12 @@
+{
+  "id": "http://example.com/schema/integer-fail",
+  "title": "Invalid IntegerSchema",
+  "anyOf": [
+    {
+      "title": "Wrong Type",
+      "description": "wrong type",
+      "type": "object",
+      "_expect": "IntegerSchema.type should be 'integer'"
+    }
+  ]
+}

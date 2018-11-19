@@ -168,5 +168,13 @@ describe( 'entity schema predicates', () => {
         assertUniquePropertySchema( name, 'name' )
       } )
     } )
+
+    describe( 'anySchema predicate', () => {
+      workingSpecSchemas.forEach( schema => {
+        it( `${ schema.title } is anySchema`, () => {
+          assert( predicates.anySchema( schema ) )
+        } )
+      } )
+    } )
   } )
 } )

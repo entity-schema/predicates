@@ -41,7 +41,7 @@ describe('entity schema predicates', () => {
         });
     });
     describe('fail', () => {
-        const { arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail } = fail_1.failSchemaMap;
+        const { arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail, enumFail, integerFail, numberFail, objectFail, oneOfFail, rootFail } = fail_1.failSchemaMap;
         const assertFails = (name, schema, predicate, assertion) => {
             describe(name, () => {
                 schema.anyOf.forEach(schema => {
@@ -62,6 +62,12 @@ describe('entity schema predicates', () => {
         assertFails('ChildEntitySchema', childEntityFail, __1.predicates.childEntitySchema, __1.assertChildEntitySchema);
         assertFails('ConstPropertySchema', constPropertyFail, __1.predicates.constPropertySchema, __1.assertConstPropertySchema);
         assertFails('EntitySchema', entityFail, __1.predicates.entitySchema, __1.assertEntitySchema);
+        assertFails('EnumSchema', enumFail, __1.predicates.enumSchema, __1.assertEnumSchema);
+        assertFails('IntegerSchema', integerFail, __1.predicates.integerSchema, __1.assertIntegerSchema);
+        assertFails('NumberSchema', numberFail, __1.predicates.numberSchema, __1.assertNumberSchema);
+        assertFails('ObjectSchema', objectFail, __1.predicates.objectSchema, __1.assertObjectSchema);
+        assertFails('OneOfSchema', oneOfFail, __1.predicates.oneOfSchema, __1.assertOneOfSchema);
+        assertFails('RootSchema', rootFail, __1.predicates.rootSchema, __1.assertRootSchema);
     });
 });
 //# sourceMappingURL=index.js.map

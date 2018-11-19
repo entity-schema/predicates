@@ -1,0 +1,28 @@
+{
+  "id": "http://example.com/schema/one-of-fail",
+  "title": "Invalid OneOfSchema",
+  "anyOf": [
+    {
+      "description": "no title",
+      "oneOf": [
+        { "$ref": "http://example.com/schema/name" },
+        { "$ref": "http://example.com/schema/address" }
+      ],
+      "_expect": "OneOfSchema.title must be a non-empty string"
+    },
+    {
+      "title": "No OneOf array",
+      "description": "no oneOf array",
+      "_expect": "OneOfSchema.oneOf should be a non-empty array"
+    },
+    {
+      "title": "OneOf are not Subschema",
+      "description": "oneOf are not Subschema",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "number" }
+      ],
+      "_expect": "OneOfSchema.oneOf should be an array of Subschema"
+    }
+  ]
+}

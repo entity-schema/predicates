@@ -1,0 +1,44 @@
+{
+  "id": "http://example.com/schema/object-fail",
+  "title": "Invalid ObjectSchema",
+  "anyOf": [
+    {
+      "title": "AdditionalProperties not false",
+      "description": "additionalProperties not false",
+      "type": "object",
+      "properties": {
+        "name": { "$ref": "http://example.com/schema/name" }
+      },
+      "additionalProperties": true,
+      "_expect": "ObjectSchema.additionalProperties should be false"
+    },
+    {
+      "title": "No Properties",
+      "description": "no properties",
+      "type": "object",
+      "additionalProperties": false,
+      "_expect": "ObjectSchema.properties should be an object"
+    },
+    {
+      "title": "Property is an EnitySchema",
+      "description": "has EntitySchema property",
+      "type": "object",
+      "properties": {
+        "entity": {
+          "id": "http://example.com/schema/entity",
+          "title": "Entity",
+          "type": "object",
+          "format": "entity-schema",
+          "properties": {
+            "name": {
+              "$ref": "http://example.com/schema/name"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "_expect": "ObjectSchema.properties['entity'] should not be an EntitySchema"
+    }
+  ]
+}

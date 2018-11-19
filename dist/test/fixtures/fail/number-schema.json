@@ -1,0 +1,12 @@
+{
+    "id": "http://example.com/schema/number-fail",
+    "title": "Invalid NumberSchema",
+    "anyOf": [
+        {
+            "title": "Wrong Type",
+            "description": "wrong type",
+            "type": "object",
+            "_expect": "NumberSchema.type should be 'number'"
+        }
+    ]
+}

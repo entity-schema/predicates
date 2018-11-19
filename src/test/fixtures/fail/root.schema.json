@@ -1,0 +1,12 @@
+{
+  "id": "http://example.com/schema/root-fail",
+  "title": "Invalid RootSchema",
+  "anyOf": [
+    {
+      "title": "No ID",
+      "description": "no id",
+      "type": "string",
+      "_expect": "RootSchema.id should be a non-empty string"
+    }
+  ]
+}

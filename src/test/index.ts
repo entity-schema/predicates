@@ -6,7 +6,8 @@ import {
   predicates, assertRootSchema, assertEntitySchema, assertChildEntitySchema,
   assertArraySchema, assertEntityReferenceSchema, assertConstPropertySchema,
   assertStringSchema, assertBooleanSchema, assertUniquePropertySchema,
-  assertEnumSchema, assertNumberSchema, assertOneOfSchema, assertSubschema
+  assertEnumSchema, assertIntegerSchema, assertNumberSchema, assertObjectSchema,
+  assertOneOfSchema, assertSubschema
 } from '..'
 
 import { failSchemaMap } from './fixtures/fail'
@@ -58,7 +59,8 @@ describe( 'entity schema predicates', () => {
 
   describe( 'fail', () => {
     const {
-      arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail
+      arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail,
+      enumFail, integerFail, numberFail, objectFail, oneOfFail, rootFail
     } = failSchemaMap
 
     const assertFails = ( name: string, schema, predicate: ( value ) => boolean, assertion: ( value ) => void ) => {
@@ -114,6 +116,48 @@ describe( 'entity schema predicates', () => {
       entityFail,
       predicates.entitySchema,
       assertEntitySchema
+    )
+
+    assertFails(
+      'EnumSchema',
+      enumFail,
+      predicates.enumSchema,
+      assertEnumSchema
+    )
+
+    assertFails(
+      'IntegerSchema',
+      integerFail,
+      predicates.integerSchema,
+      assertIntegerSchema
+    )
+
+    assertFails(
+      'NumberSchema',
+      numberFail,
+      predicates.numberSchema,
+      assertNumberSchema
+    )
+
+    assertFails(
+      'ObjectSchema',
+      objectFail,
+      predicates.objectSchema,
+      assertObjectSchema
+    )
+
+    assertFails(
+      'OneOfSchema',
+      oneOfFail,
+      predicates.oneOfSchema,
+      assertOneOfSchema
+    )
+
+    assertFails(
+      'RootSchema',
+      rootFail,
+      predicates.rootSchema,
+      assertRootSchema
     )
   })
 })

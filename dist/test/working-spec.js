@@ -124,6 +124,13 @@ describe('entity schema predicates', () => {
                 __1.assertUniquePropertySchema(name, 'name');
             });
         });
+        describe('anySchema predicate', () => {
+            working_spec_1.workingSpecSchemas.forEach(schema => {
+                it(`${schema.title} is anySchema`, () => {
+                    assert(__1.predicates.anySchema(schema));
+                });
+            });
+        });
     });
 });
 //# sourceMappingURL=working-spec.js.map

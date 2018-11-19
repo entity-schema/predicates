@@ -17,8 +17,8 @@ exports.assertOneOfSchema = (oneOfSchema, name = 'OneOfSchema') => {
         throw TypeError(`${name} must be an object`);
     if (!util_1.isNonEmptyString(oneOfSchema.title))
         throw TypeError(`${name}.title must be a non-empty string`);
-    if (!is_1.is.array(oneOfSchema.oneOf))
-        throw TypeError(`${name}.oneOf should be an array`);
+    if (!util_1.isNonEmptyArray(oneOfSchema.oneOf))
+        throw TypeError(`${name}.oneOf should be a non-empty array`);
     if (!oneOfSchema.oneOf.every(subschema_1.isSubschema))
         throw TypeError(`${name}.oneOf should be an array of Subschema`);
 };

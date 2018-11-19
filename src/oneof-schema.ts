@@ -1,6 +1,6 @@
 import { is } from '@mojule/is'
 import { Subschema, isSubschema } from './subschema'
-import { isNonEmptyString } from './util'
+import { isNonEmptyString, isNonEmptyArray } from './util'
 
 export interface OneOfSchema {
   title: string
@@ -24,8 +24,8 @@ export const assertOneOfSchema = ( oneOfSchema, name = 'OneOfSchema' ) => {
   if ( !isNonEmptyString( oneOfSchema.title ))
     throw TypeError( `${ name }.title must be a non-empty string` )
 
-  if( !is.array( oneOfSchema.oneOf ) )
-    throw TypeError( `${ name }.oneOf should be an array` )
+  if( !isNonEmptyArray( oneOfSchema.oneOf ) )
+    throw TypeError( `${ name }.oneOf should be a non-empty array` )
 
   if( !oneOfSchema.oneOf.every( isSubschema ) )
     throw TypeError( `${ name }.oneOf should be an array of Subschema` )

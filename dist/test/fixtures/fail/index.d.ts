@@ -154,4 +154,143 @@ export declare const failSchemaMap: {
             "format"?: undefined;
         })[];
     };
+    enumFail: {
+        "id": string;
+        "title": string;
+        "anyOf": ({
+            "title": string;
+            "description": string;
+            "type": string;
+            "_esTitles": string[];
+            "_expect": string;
+            "enum"?: undefined;
+        } | {
+            "title": string;
+            "description": string;
+            "type": string;
+            "enum": number[];
+            "_esTitles": string[];
+            "_expect": string;
+        } | {
+            "title": string;
+            "description": string;
+            "type": string;
+            "enum": string[];
+            "_expect": string;
+            "_esTitles"?: undefined;
+        } | {
+            "title": string;
+            "description": string;
+            "type": string;
+            "enum": string[];
+            "_esTitles": number[];
+            "_expect": string;
+        } | {
+            "title": string;
+            "description": string;
+            "type": string;
+            "enum": string[];
+            "_esTitles": string[];
+            "_expect": string;
+        })[];
+    };
+    integerFail: {
+        "id": string;
+        "title": string;
+        "anyOf": {
+            "title": string;
+            "description": string;
+            "type": string;
+            "_expect": string;
+        }[];
+    };
+    numberFail: {
+        "id": string;
+        "title": string;
+        "anyOf": {
+            "title": string;
+            "description": string;
+            "type": string;
+            "_expect": string;
+        }[];
+    };
+    objectFail: {
+        "id": string;
+        "title": string;
+        "anyOf": ({
+            "title": string;
+            "description": string;
+            "type": string;
+            "properties": {
+                "name": {
+                    "$ref": string;
+                };
+                "entity"?: undefined;
+            };
+            "additionalProperties": boolean;
+            "_expect": string;
+        } | {
+            "title": string;
+            "description": string;
+            "type": string;
+            "additionalProperties": boolean;
+            "_expect": string;
+            "properties"?: undefined;
+        } | {
+            "title": string;
+            "description": string;
+            "type": string;
+            "properties": {
+                "entity": {
+                    "id": string;
+                    "title": string;
+                    "type": string;
+                    "format": string;
+                    "properties": {
+                        "name": {
+                            "$ref": string;
+                        };
+                    };
+                    "additionalProperties": boolean;
+                };
+                "name"?: undefined;
+            };
+            "additionalProperties": boolean;
+            "_expect": string;
+        })[];
+    };
+    oneOfFail: {
+        "id": string;
+        "title": string;
+        "anyOf": ({
+            "description": string;
+            "oneOf": {
+                "$ref": string;
+            }[];
+            "_expect": string;
+            "title"?: undefined;
+        } | {
+            "title": string;
+            "description": string;
+            "_expect": string;
+            "oneOf"?: undefined;
+        } | {
+            "title": string;
+            "description": string;
+            "oneOf": {
+                "type": string;
+            }[];
+            "_expect": string;
+        })[];
+    };
+    rootFail: {
+        "id": string;
+        "title": string;
+        "anyOf": {
+            "title": string;
+            "description": string;
+            "type": string;
+            "_expect": string;
+        }[];
+    };
 };

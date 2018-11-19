@@ -1,0 +1,44 @@
+{
+    "id": "http://example.com/schema/enum-fail",
+    "title": "Invalid EnumSchema",
+    "anyOf": [
+        {
+            "title": "No Enum",
+            "description": "no enum",
+            "type": "string",
+            "_esTitles": ["Foo", "Bar"],
+            "_expect": "EnumSchema.enum should be a non-empty array"
+        },
+        {
+            "title": "Enum not Strings",
+            "description": "not strings in enum",
+            "type": "string",
+            "enum": [1, 2],
+            "_esTitles": ["Foo", "Bar"],
+            "_expect": "EnumSchema.enum should be an array of strings"
+        },
+        {
+            "title": "No Titles",
+            "description": "no _esTitles",
+            "type": "string",
+            "enum": ["foo", "bar"],
+            "_expect": "EnumSchema._esTitles should be a non-empty array"
+        },
+        {
+            "title": "Titles not Strings",
+            "description": "not strings in _esTitles",
+            "type": "string",
+            "enum": ["foo", "bar"],
+            "_esTitles": [1, 2],
+            "_expect": "EnumSchema._esTitles should be an array of strings"
+        },
+        {
+            "title": "Wrong Length",
+            "description": "enum length does not match _esTitles length",
+            "type": "string",
+            "enum": ["foo", "bar"],
+            "_esTitles": ["Foo"],
+            "_expect": "EnumSchema.enum and EnumSchema._esTitles should be the same length"
+        }
+    ]
+}
