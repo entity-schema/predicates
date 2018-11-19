@@ -11,9 +11,9 @@ import {
 import {
   predicates, assertRootSchema, assertEntitySchema, assertChildEntitySchema,
   assertArraySchema, assertEntityReferenceSchema, assertConstPropertySchema,
-  assertStringSchema, assertBooleanSchema, assertUniquePropertySchema, assertSecuritySchema
+  assertStringSchema, assertBooleanSchema, assertUniquePropertySchema,
+  assertSecuritySchema, assertIntegerSchema, assertSecuritySchemaRoles
 } from '..'
-import { assertIntegerSchema } from '../integer-schema';
 
 describe( 'entity schema predicates', () => {
   describe( 'common', () => {
@@ -72,6 +72,10 @@ describe( 'entity schema predicates', () => {
           it( `assertSecuritySchema ${ schema.title }`, () => {
             assertSecuritySchema( schema, schema.title )
           } )
+
+          it( `assertSecuritySchemaRoles ${ schema.title }`, () => {
+            assertSecuritySchemaRoles( schema, 'create' )
+          })
         } )
       } )
     } )

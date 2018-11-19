@@ -1,5 +1,4 @@
 {
-  "id": "http://example.com/schema/one-of-pass",
   "title": "A valid OneOfSchema",
   "oneOf": [
     { "$ref": "http://example.com/schema/enum-pass" },

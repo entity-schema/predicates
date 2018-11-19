@@ -11,8 +11,14 @@ const numberFail = require("./number-schema.json");
 const objectFail = require("./object.schema.json");
 const oneOfFail = require("./one-of.schema.json");
 const rootFail = require("./root.schema.json");
+const securityFail = require("./security.schema.json");
+const stringFail = require("./string.schema.json");
+const subschemaFail = require("./subschema.schema.json");
+const uniquePropertyFail = require("./unique-property.schema.json");
+const typedSchemaOfFail = require("./typed-schema-of.schema.json");
 exports.failSchemaMap = {
     arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail,
-    enumFail, integerFail, numberFail, objectFail, oneOfFail, rootFail
+    enumFail, integerFail, numberFail, objectFail, oneOfFail, rootFail,
+    securityFail, stringFail, subschemaFail, typedSchemaOfFail, uniquePropertyFail
 };
 //# sourceMappingURL=index.js.map

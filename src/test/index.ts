@@ -1,15 +1,14 @@
 import * as assert from 'assert'
 
-import { passSchemas, passSchemaMap } from './fixtures/pass'
-
 import {
   predicates, assertRootSchema, assertEntitySchema, assertChildEntitySchema,
-  assertArraySchema, assertEntityReferenceSchema, assertConstPropertySchema,
-  assertStringSchema, assertBooleanSchema, assertUniquePropertySchema,
-  assertEnumSchema, assertIntegerSchema, assertNumberSchema, assertObjectSchema,
-  assertOneOfSchema, assertSubschema
+  assertArraySchema, assertConstPropertySchema, assertStringSchema,
+  assertBooleanSchema, assertUniquePropertySchema, assertEnumSchema,
+  assertIntegerSchema, assertNumberSchema, assertObjectSchema,
+  assertOneOfSchema, assertSubschema, assertSecuritySchema, assertTypedSchemaOf
 } from '..'
 
+import { passSchemaMap } from './fixtures/pass'
 import { failSchemaMap } from './fixtures/fail'
 
 describe( 'entity schema predicates', () => {
@@ -60,7 +59,9 @@ describe( 'entity schema predicates', () => {
   describe( 'fail', () => {
     const {
       arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail,
-      enumFail, integerFail, numberFail, objectFail, oneOfFail, rootFail
+      enumFail, integerFail, numberFail, objectFail, oneOfFail, rootFail,
+      securityFail, stringFail, subschemaFail, typedSchemaOfFail,
+      uniquePropertyFail
     } = failSchemaMap
 
     const assertFails = ( name: string, schema, predicate: ( value ) => boolean, assertion: ( value ) => void ) => {
@@ -158,6 +159,41 @@ describe( 'entity schema predicates', () => {
       rootFail,
       predicates.rootSchema,
       assertRootSchema
+    )
+
+    assertFails(
+      'SecuritySchema',
+      securityFail,
+      predicates.securitySchema,
+      assertSecuritySchema
+    )
+
+    assertFails(
+      'StringSchema',
+      stringFail,
+      predicates.stringSchema,
+      assertStringSchema
+    )
+
+    assertFails(
+      'Subschema',
+      subschemaFail,
+      predicates.subschema,
+      assertSubschema
+    )
+
+    assertFails(
+      'TypedSchemaOf',
+      typedSchemaOfFail,
+      () => false,
+      value => assertTypedSchemaOf( value, 'string' )
+    )
+
+    assertFails(
+      'UniquePropertySchema',
+      uniquePropertyFail,
+      predicates.uniquePropertySchema,
+      assertUniquePropertySchema
     )
   })
 })

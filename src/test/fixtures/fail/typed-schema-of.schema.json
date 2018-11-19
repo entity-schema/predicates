@@ -1,0 +1,12 @@
+{
+  "id": "http://example.com/schema/typed-schema-of-fail",
+  "title": "Invalid TypedSchema",
+  "anyOf": [
+    {
+      "title": "Wrong Type",
+      "description": "wrong type",
+      "type": "object",
+      "_expect": "TypedSchema.type should be 'string'"
+    }
+  ]
+}

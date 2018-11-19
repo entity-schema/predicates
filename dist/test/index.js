@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const assert = require("assert");
-const pass_1 = require("./fixtures/pass");
 const __1 = require("..");
+const pass_1 = require("./fixtures/pass");
 const fail_1 = require("./fixtures/fail");
 describe('entity schema predicates', () => {
     describe('pass', () => {
@@ -41,7 +41,7 @@ describe('entity schema predicates', () => {
         });
     });
     describe('fail', () => {
-        const { arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail, enumFail, integerFail, numberFail, objectFail, oneOfFail, rootFail } = fail_1.failSchemaMap;
+        const { arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail, enumFail, integerFail, numberFail, objectFail, oneOfFail, rootFail, securityFail, stringFail, subschemaFail, typedSchemaOfFail, uniquePropertyFail } = fail_1.failSchemaMap;
         const assertFails = (name, schema, predicate, assertion) => {
             describe(name, () => {
                 schema.anyOf.forEach(schema => {
@@ -68,6 +68,11 @@ describe('entity schema predicates', () => {
         assertFails('ObjectSchema', objectFail, __1.predicates.objectSchema, __1.assertObjectSchema);
         assertFails('OneOfSchema', oneOfFail, __1.predicates.oneOfSchema, __1.assertOneOfSchema);
         assertFails('RootSchema', rootFail, __1.predicates.rootSchema, __1.assertRootSchema);
+        assertFails('SecuritySchema', securityFail, __1.predicates.securitySchema, __1.assertSecuritySchema);
+        assertFails('StringSchema', stringFail, __1.predicates.stringSchema, __1.assertStringSchema);
+        assertFails('Subschema', subschemaFail, __1.predicates.subschema, __1.assertSubschema);
+        assertFails('TypedSchemaOf', typedSchemaOfFail, () => false, value => __1.assertTypedSchemaOf(value, 'string'));
+        assertFails('UniquePropertySchema', uniquePropertyFail, __1.predicates.uniquePropertySchema, __1.assertUniquePropertySchema);
     });
 });
 //# sourceMappingURL=index.js.map

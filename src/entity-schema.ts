@@ -1,8 +1,10 @@
 import { ObjectSchema, assertObjectSchema } from './object-schema'
 import { isNonEmptyString } from './util'
+import { RootSchema } from './root-schema'
 
-export interface EntitySchema extends ObjectSchema {
-  id: string
+export type EntitySchema = EntitySchemaBase & RootSchema
+
+interface EntitySchemaBase extends ObjectSchema {
   format: 'entity-schema'
 }
 

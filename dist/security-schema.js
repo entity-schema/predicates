@@ -16,15 +16,15 @@ exports.assertSecuritySchema = (securitySchema, name = 'SecuritySchema') => {
     typed_schema_1.assertTypedSchema(securitySchema, name);
     if (!is_1.is.object(securitySchema._esSecurity))
         throw TypeError(`${name}._esSecurity should be an object`);
-    exports.assertSecuritySchemaRoles(securitySchema._esSecurity.create, 'create', name);
-    exports.assertSecuritySchemaRoles(securitySchema._esSecurity.read, 'read', name);
-    exports.assertSecuritySchemaRoles(securitySchema._esSecurity.update, 'update', name);
-    exports.assertSecuritySchemaRoles(securitySchema._esSecurity.delete, 'delete', name);
+    exports.assertSecuritySchemaRoles(securitySchema, 'create', name);
+    exports.assertSecuritySchemaRoles(securitySchema, 'read', name);
+    exports.assertSecuritySchemaRoles(securitySchema, 'update', name);
+    exports.assertSecuritySchemaRoles(securitySchema, 'delete', name);
 };
-exports.assertSecuritySchemaRoles = (roles, roleName, name = 'SecuritySchema') => {
-    if (!util_1.isNonEmptyArray(roles))
+exports.assertSecuritySchemaRoles = (securitySchema, roleName, name = 'SecuritySchema') => {
+    if (!util_1.isNonEmptyArray(securitySchema._esSecurity[roleName]))
         throw TypeError(`${name}._esSecurity.${roleName} should be a non-empty array`);
-    if (!roles.every(util_1.isNonEmptyString))
+    if (!securitySchema._esSecurity[roleName].every(util_1.isNonEmptyString))
         throw TypeError(`${name}._esSecurity.${roleName} should be an array of non-empty strings`);
 };
 //# sourceMappingURL=security-schema.js.map

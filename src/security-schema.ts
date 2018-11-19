@@ -30,21 +30,21 @@ export const assertSecuritySchema = (
   if( !is.object( securitySchema._esSecurity ) )
     throw TypeError( `${ name }._esSecurity should be an object` )
 
-  assertSecuritySchemaRoles( securitySchema._esSecurity.create, 'create', name )
-  assertSecuritySchemaRoles( securitySchema._esSecurity.read, 'read', name )
-  assertSecuritySchemaRoles( securitySchema._esSecurity.update, 'update', name )
-  assertSecuritySchemaRoles( securitySchema._esSecurity.delete, 'delete', name )
+  assertSecuritySchemaRoles( securitySchema, 'create', name )
+  assertSecuritySchemaRoles( securitySchema, 'read', name )
+  assertSecuritySchemaRoles( securitySchema, 'update', name )
+  assertSecuritySchemaRoles( securitySchema, 'delete', name )
 }
 
 export const assertSecuritySchemaRoles = (
-  roles, roleName: string, name = 'SecuritySchema'
+  securitySchema, roleName: string, name = 'SecuritySchema'
 ) => {
-  if( !isNonEmptyArray( roles ) )
+  if ( !isNonEmptyArray( securitySchema._esSecurity[ roleName ] ) )
     throw TypeError(
       `${ name }._esSecurity.${ roleName } should be a non-empty array`
     )
 
-  if( !roles.every( isNonEmptyString ) )
+  if ( !securitySchema._esSecurity[ roleName ].every( isNonEmptyString ) )
     throw TypeError(
       `${ name }._esSecurity.${
         roleName

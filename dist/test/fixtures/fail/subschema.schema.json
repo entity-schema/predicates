@@ -1,0 +1,11 @@
+{
+    "id": "http://example.com/schema/subschema-fail",
+    "title": "Invalid Subschema",
+    "anyOf": [
+        {
+            "title": "Not a Subschema",
+            "description": "not a subschema",
+            "_expect": "Subschema should be RefSchema, TypedSchema or OneOfSchema"
+        }
+    ]
+}

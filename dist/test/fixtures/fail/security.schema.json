@@ -1,0 +1,35 @@
+{
+    "id": "http://example.com/schema/security-fail",
+    "title": "Invalid SecuritySchema",
+    "anyOf": [
+        {
+            "title": "Missing Security",
+            "description": "missing _esSecurity property",
+            "type": "string",
+            "_expect": "SecuritySchema._esSecurity should be an object"
+        },
+        {
+            "title": "Missing a Property",
+            "description": "missing create property",
+            "type": "string",
+            "_esSecurity": {
+                "read": ["admin"],
+                "update": ["admin"],
+                "delete": ["admin"]
+            },
+            "_expect": "SecuritySchema._esSecurity.create should be a non-empty array"
+        },
+        {
+            "title": "Wrong type in Roles",
+            "description": "wrong type in create foles",
+            "type": "string",
+            "_esSecurity": {
+                "create": [1],
+                "read": ["admin"],
+                "update": ["admin"],
+                "delete": ["admin"]
+            },
+            "_expect": "SecuritySchema._esSecurity.create should be an array of non-empty strings"
+        }
+    ]
+}

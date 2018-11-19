@@ -12,7 +12,7 @@ exports.isSubschema = (value) => {
         return true;
     return false;
 };
-exports.assertSubschema = (value, name = 'SubSchema') => {
+exports.assertSubschema = (value, name = 'Subschema') => {
     if (!exports.isSubschema(value))
         throw TypeError(`${name} should be RefSchema, TypedSchema or OneOfSchema`);
 };

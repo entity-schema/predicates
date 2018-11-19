@@ -14,7 +14,7 @@ export const isSubschema = ( value ) : value is Subschema => {
   return false
 }
 
-export const assertSubschema = ( value, name = 'SubSchema' ) => {
+export const assertSubschema = ( value, name = 'Subschema' ) => {
   if ( !isSubschema( value ) )
     throw TypeError(
       `${ name } should be RefSchema, TypedSchema or OneOfSchema`

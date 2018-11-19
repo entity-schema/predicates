@@ -1,5 +1,4 @@
 {
-  "id": "http://example.com/schema/enum-pass",
   "title": "A valid EnumSchema",
   "type": "string",
   "enum": [

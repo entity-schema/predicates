@@ -4,7 +4,6 @@ const assert = require("assert");
 const files_1 = require("./fixtures/common/files");
 const security_1 = require("./fixtures/common/security");
 const __1 = require("..");
-const integer_schema_1 = require("../integer-schema");
 describe('entity schema predicates', () => {
     describe('common', () => {
         describe('files', () => {
@@ -14,7 +13,7 @@ describe('entity schema predicates', () => {
                     assert(__1.predicates.integerSchema(fileMeta.properties.size));
                 });
                 it('assertIntegerSchema fileMeta.properties.size', () => {
-                    integer_schema_1.assertIntegerSchema(fileMeta.properties.size, 'fileMeta.properties.size');
+                    __1.assertIntegerSchema(fileMeta.properties.size, 'fileMeta.properties.size');
                 });
             });
             describe('RootSchema', () => {
@@ -48,6 +47,9 @@ describe('entity schema predicates', () => {
                     });
                     it(`assertSecuritySchema ${schema.title}`, () => {
                         __1.assertSecuritySchema(schema, schema.title);
+                    });
+                    it(`assertSecuritySchemaRoles ${schema.title}`, () => {
+                        __1.assertSecuritySchemaRoles(schema, 'create');
                     });
                 });
             });

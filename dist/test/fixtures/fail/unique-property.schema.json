@@ -1,0 +1,13 @@
+{
+    "id": "http://example.com/schema/unique-property-fail",
+    "title": "Invalid UniquePropertySchema",
+    "anyOf": [
+        {
+            "title": "Unique not Set",
+            "description": "_esUnique not true",
+            "type": "string",
+            "_esUnique": false,
+            "_expect": "UniquePropertySchema._esUnique should be true"
+        }
+    ]
+}

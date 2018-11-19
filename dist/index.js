@@ -39,6 +39,7 @@ var subschema_2 = require("./subschema");
 exports.assertSubschema = subschema_2.assertSubschema;
 var typed_schema_2 = require("./typed-schema");
 exports.assertTypedSchema = typed_schema_2.assertTypedSchema;
+exports.assertTypedSchemaOf = typed_schema_2.assertTypedSchemaOf;
 var object_schema_2 = require("./object-schema");
 exports.assertObjectSchema = object_schema_2.assertObjectSchema;
 exports.assertObjectSchemaProperties = object_schema_2.assertObjectSchemaProperties;
@@ -55,6 +56,7 @@ var integer_schema_2 = require("./integer-schema");
 exports.assertIntegerSchema = integer_schema_2.assertIntegerSchema;
 var security_schema_2 = require("./security-schema");
 exports.assertSecuritySchema = security_schema_2.assertSecuritySchema;
+exports.assertSecuritySchemaRoles = security_schema_2.assertSecuritySchemaRoles;
 var unique_property_schema_2 = require("./unique-property-schema");
 exports.assertUniquePropertySchema = unique_property_schema_2.assertUniquePropertySchema;
 // object key order is important - will match in that order when finding types!

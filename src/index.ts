@@ -27,7 +27,7 @@ export { assertChildEntitySchema } from './child-entity-schema'
 export { assertConstPropertySchema } from './const-property-schema'
 export { assertEntityReferenceSchema } from './entity-reference-schema'
 export { assertSubschema } from './subschema'
-export { assertTypedSchema } from './typed-schema'
+export { assertTypedSchema, assertTypedSchemaOf } from './typed-schema'
 export {
   assertObjectSchema, assertObjectSchemaProperties, assertObjectSchemaProperty
 } from './object-schema'
@@ -36,7 +36,9 @@ export { assertNumberSchema } from './number-schema'
 export { assertBooleanSchema } from './boolean-schema'
 export { assertArraySchema } from './array-schema'
 export { assertIntegerSchema } from './integer-schema'
-export { assertSecuritySchema } from './security-schema'
+export {
+  assertSecuritySchema, assertSecuritySchemaRoles
+} from './security-schema'
 export { assertUniquePropertySchema } from './unique-property-schema'
 
 // object key order is important - will match in that order when finding types!

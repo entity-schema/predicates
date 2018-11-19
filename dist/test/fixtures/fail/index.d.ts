@@ -293,4 +293,77 @@ export declare const failSchemaMap: {
             "_expect": string;
         }[];
     };
+    securityFail: {
+        "id": string;
+        "title": string;
+        "anyOf": ({
+            "title": string;
+            "description": string;
+            "type": string;
+            "_expect": string;
+            "_esSecurity"?: undefined;
+        } | {
+            "title": string;
+            "description": string;
+            "type": string;
+            "_esSecurity": {
+                "read": string[];
+                "update": string[];
+                "delete": string[];
+                "create"?: undefined;
+            };
+            "_expect": string;
+        } | {
+            "title": string;
+            "description": string;
+            "type": string;
+            "_esSecurity": {
+                "create": number[];
+                "read": string[];
+                "update": string[];
+                "delete": string[];
+            };
+            "_expect": string;
+        })[];
+    };
+    stringFail: {
+        "id": string;
+        "title": string;
+        "anyOf": {
+            "title": string;
+            "description": string;
+            "type": string;
+            "_expect": string;
+        }[];
+    };
+    subschemaFail: {
+        "id": string;
+        "title": string;
+        "anyOf": {
+            "title": string;
+            "description": string;
+            "_expect": string;
+        }[];
+    };
+    typedSchemaOfFail: {
+        "id": string;
+        "title": string;
+        "anyOf": {
+            "title": string;
+            "description": string;
+            "type": string;
+            "_expect": string;
+        }[];
+    };
+    uniquePropertyFail: {
+        "id": string;
+        "title": string;
+        "anyOf": {
+            "title": string;
+            "description": string;
+            "type": string;
+            "_esUnique": boolean;
+            "_expect": string;
+        }[];
+    };
 };

@@ -1,0 +1,12 @@
+{
+    "id": "http://example.com/schema/string-fail",
+    "title": "Invalid StringSchema",
+    "anyOf": [
+        {
+            "title": "Wrong Type",
+            "description": "wrong type",
+            "type": "object",
+            "_expect": "StringSchema.type should be 'string'"
+        }
+    ]
+}
