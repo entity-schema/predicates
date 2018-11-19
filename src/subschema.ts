@@ -13,5 +13,8 @@ export const isSubschema = ( value ) : value is Subschema => {
 }
 
 export const assertSubschema = value => {
-  assert( isSubschema( value ), 'Subschema should be RefSchema or TypedSchema' )
+  assert(
+    isSubschema( value ),
+    'Subschema should be RefSchema or TypedSchema'
+  )
 }

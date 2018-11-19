@@ -1,5 +1,6 @@
+import * as assert from 'assert'
 import { is } from '@mojule/is'
-import { isStringSchema, StringSchema } from './string-schema'
+import { StringSchema, assertStringSchema } from './string-schema'
 
 export interface EnumSchema extends StringSchema {
   enum: string[]
@@ -7,11 +8,40 @@ export interface EnumSchema extends StringSchema {
 }
 
 export const isEnumSchema = ( value ) : value is EnumSchema => {
-  if( !isStringSchema( value ) ) return false
-
-  if ( !is.array( value.enum ) ) return false
-  if ( !is.array( value._esTitles ) ) return false
-  if( value.enum.length !== value._esTitles.length ) return false
+  try {
+    assertEnumSchema( value )
+  } catch {
+    return false
+  }
 
   return true
+}
+
+export const assertEnumSchema = enumSchema => {
+  assertStringSchema( enumSchema )
+
+  assert(
+    is.array( enumSchema.enum ) && enumSchema.length > 0,
+    'EnumSchema.enum should be a non-empty array'
+  )
+
+  assert(
+    enumSchema.enum.every( is.string ),
+    'EnumSchema.enum should be an array of strings'
+  )
+
+  assert(
+    is.array( enumSchema._esTitles ) && enumSchema.length > 0,
+    'EnumSchema._esTitles should be a non-empty array'
+  )
+
+  assert(
+    enumSchema._esTitles.every( is.string ),
+    'EnumSchema._esTitles should be an array of strings'
+  )
+
+  assert.strictEqual(
+    enumSchema.enum.length, enumSchema._esTitles.length,
+    'EnumSchema.enum and EnumSchema._esTitles should be the same length'
+  )
 }

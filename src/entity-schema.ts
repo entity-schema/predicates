@@ -1,6 +1,6 @@
-import { ObjectSchema, isObjectSchema } from './object-schema'
-import { is } from '@mojule/is'
 import * as assert from 'assert'
+import { ObjectSchema, assertObjectSchema } from './object-schema'
+import { isNonEmptyString } from './util'
 
 export interface EntitySchema extends ObjectSchema {
   id: string
@@ -8,15 +8,19 @@ export interface EntitySchema extends ObjectSchema {
 }
 
 export const isEntitySchema = ( value ) : value is EntitySchema => {
-  if( !isObjectSchema( value ) ) return false
-
-  if( !is.string( value.id ) ) return false
-
-  if ( value.format !== 'entity-schema' ) return false
+  try {
+    assertEntitySchema( value )
+  } catch {
+    return false
+  }
 
   return true
 }
 
-export const assertEntitySchema = value => {
-
+export const assertEntitySchema = entitySchema => {
+  assertObjectSchema( entitySchema )
+  assert(
+    isNonEmptyString( entitySchema.id ),
+    'EntitySchema.id must be a non-empty string'
+  )
 }

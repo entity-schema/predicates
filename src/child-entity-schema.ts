@@ -1,7 +1,7 @@
-import { is } from '@mojule/is'
-import { isEntitySchema, EntitySchema, assertEntitySchema } from './entity-schema'
-import { isEntityReferenceSchema } from './entity-reference-schema'
 import * as assert from 'assert'
+import { is } from '@mojule/is'
+import { EntitySchema, assertEntitySchema } from './entity-schema'
+import { isEntityReferenceSchema } from './entity-reference-schema'
 
 export interface ChildEntitySchema extends EntitySchema {
   _esParentKey: string
@@ -26,7 +26,11 @@ export const assertChildEntitySchema = childEntitySchema => {
   )
 
   assert(
-    isEntityReferenceSchema( childEntitySchema.properties[ childEntitySchema._esParentKey ] ),
-    `ChildEntitySchema.properties['${ childEntitySchema._esParentKey }'] should be an EntityReferenceSchema`
+    isEntityReferenceSchema(
+      childEntitySchema.properties[ childEntitySchema._esParentKey ]
+    ),
+    `ChildEntitySchema.properties['${
+      childEntitySchema._esParentKey
+    }'] should be an EntityReferenceSchema`
   )
 }

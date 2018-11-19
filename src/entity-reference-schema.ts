@@ -1,7 +1,8 @@
-import * as assert from 'assert'
-import { ObjectSchema, isObjectSchema } from './object-schema'
-import { StringSchema, isStringSchema } from './string-schema'
-import { ConstPropertySchema, isConstPropertySchema } from './const-property-schema'
+import { ObjectSchema, assertObjectSchema } from './object-schema'
+import { StringSchema, assertStringSchema } from './string-schema'
+import {
+  ConstPropertySchema, assertConstPropertySchema
+} from './const-property-schema'
 
 export interface EntityReferenceSchema extends ObjectSchema {
   properties: {
@@ -11,15 +12,17 @@ export interface EntityReferenceSchema extends ObjectSchema {
 }
 
 export const isEntityReferenceSchema = ( value ) : value is EntityReferenceSchema => {
-  if( !isObjectSchema( value ) ) return false
-
-  if( !isStringSchema( value.properties.entityId ) ) return false
-
-  if( !isConstPropertySchema( value.properties.entityType ) ) return false
+  try {
+    assertEntityReferenceSchema( value )
+  } catch {
+    return false
+  }
 
   return true
 }
 
-export const assertEntityReferenceSchema = value => {
-  assert
+export const assertEntityReferenceSchema = entityReferenceSchema => {
+  assertObjectSchema( entityReferenceSchema )
+  assertStringSchema( entityReferenceSchema.properties.entityId )
+  assertConstPropertySchema( entityReferenceSchema.properties.entityType )
 }
