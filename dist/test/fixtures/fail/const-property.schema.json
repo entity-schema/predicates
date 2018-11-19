@@ -1,0 +1,49 @@
+{
+    "id": "http://example.com/schema/const-property-fail",
+    "title": "Invalid ConstPropertySchema",
+    "anyOf": [
+        {
+            "title": "No Enum",
+            "description": "no enum",
+            "type": "string",
+            "default": "Foo",
+            "readOnly": true,
+            "_expect": "ConstPropertySchema.enum should be an array"
+        },
+        {
+            "title": "Enum[0] not a String",
+            "description": "enum[0] not a string",
+            "type": "string",
+            "enum": [null],
+            "default": "Foo",
+            "readOnly": true,
+            "_expect": "ConstPropertySchema.enum[0] should be a string"
+        },
+        {
+            "title": "Default not a String",
+            "description": "default not a string",
+            "type": "string",
+            "enum": ["Foo"],
+            "readOnly": true,
+            "_expect": "ConstPropertySchema.default should be a string"
+        },
+        {
+            "title": "Enum[0] does not Match Default",
+            "description": "enum[0] does not match default",
+            "type": "string",
+            "enum": ["Foo"],
+            "default": "Bar",
+            "readOnly": true,
+            "_expect": "ConstPropertySchema.enum[0] should match ConstPropertySchema.default"
+        },
+        {
+            "title": "Not ReadOnly",
+            "description": "not readonly",
+            "type": "string",
+            "enum": ["Foo"],
+            "default": "Foo",
+            "readOnly": false,
+            "_expect": "ConstPropertySchema.readOnly should be true"
+        }
+    ]
+}

@@ -14,6 +14,8 @@ export const isBooleanSchema = ( value ): value is BooleanSchema => {
   return true
 }
 
-export const assertBooleanSchema = booleanSchema => {
-  assertTypedSchemaOf( booleanSchema, 'boolean' )
+export const assertBooleanSchema = (
+  booleanSchema, name = 'BooleanSchema'
+) => {
+  assertTypedSchemaOf( booleanSchema, 'boolean', name )
 }

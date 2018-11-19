@@ -1,9 +1,9 @@
-import * as assert from 'assert'
 import { is } from '@mojule/is'
-import { TypedSchema, assertTypedSchema } from './typed-schema'
 import { Subschema, isSubschema } from './subschema'
+import { isNonEmptyString } from './util'
 
-export interface OneOfSchema extends TypedSchema {
+export interface OneOfSchema {
+  title: string
   oneOf: Subschema[]
 }
 
@@ -17,16 +17,16 @@ export const isOneOfSchema = ( value ) : value is OneOfSchema => {
   return true
 }
 
-export const assertOneOfSchema = oneOfSchema => {
-  assertTypedSchema( oneOfSchema )
+export const assertOneOfSchema = ( oneOfSchema, name = 'OneOfSchema' ) => {
+  if ( !is.object( oneOfSchema ) )
+    throw TypeError( `${ name } must be an object` )
 
-  assert(
-    is.array( oneOfSchema.oneOf ),
-    'OneOfSchema.oneOf should be an array'
-  )
+  if ( !isNonEmptyString( oneOfSchema.title ))
+    throw TypeError( `${ name }.title must be a non-empty string` )
 
-  assert(
-    oneOfSchema.oneOf.every( isSubschema ),
-    'OneOfSchema.oneOf should be an array of Subschema'
-  )
+  if( !is.array( oneOfSchema.oneOf ) )
+    throw TypeError( `${ name }.oneOf should be an array` )
+
+  if( !oneOfSchema.oneOf.every( isSubschema ) )
+    throw TypeError( `${ name }.oneOf should be an array of Subschema` )
 }

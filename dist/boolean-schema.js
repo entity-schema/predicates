@@ -2,10 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const typed_schema_1 = require("./typed-schema");
 exports.isBooleanSchema = (value) => {
-    if (!typed_schema_1.isTypedSchema(value))
+    try {
+        exports.assertBooleanSchema(value);
+    }
+    catch (_a) {
         return false;
-    if (value.type !== 'boolean')
-        return false;
+    }
     return true;
+};
+exports.assertBooleanSchema = (booleanSchema, name = 'BooleanSchema') => {
+    typed_schema_1.assertTypedSchemaOf(booleanSchema, 'boolean', name);
 };
 //# sourceMappingURL=boolean-schema.js.map

@@ -1,0 +1,28 @@
+{
+    "id": "http://workingspec.com/schema/file-meta",
+    "title": "File Meta",
+    "description": "Metadata about the file",
+    "type": "object",
+    "properties": {
+        "filename": {
+            "title": "Filename",
+            "description": "The name of the file",
+            "type": "string"
+        },
+        "mimetype": {
+            "title": "Mime Type",
+            "description": "The mime type of the file",
+            "type": "string"
+        },
+        "size": {
+            "title": "Size",
+            "description": "The size of the file in bytes",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "filename",
+        "mimetype",
+        "size"
+    ]
+}

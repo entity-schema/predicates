@@ -1,8 +1,7 @@
+import { is } from '@mojule/is'
 import { Subschema, assertSubschema } from './subschema'
 import { isEntitySchema } from './entity-schema'
 import { TypedSchema, assertTypedSchemaOf } from './typed-schema'
-import * as assert from 'assert'
-import { is } from '@mojule/is';
 
 export interface ObjectSchemaProperties {
   [ name: string ]: Subschema
@@ -24,32 +23,36 @@ export const isObjectSchema = ( value ) : value is ObjectSchema => {
   return true
 }
 
-export const assertObjectSchema = objectSchema => {
-  assertTypedSchemaOf( objectSchema, 'object' )
+export const assertObjectSchema = ( objectSchema, name = 'ObjectSchema' ) => {
+  assertTypedSchemaOf( objectSchema, 'object', name )
 
-  assert.strictEqual(
-    objectSchema.additionalProperties, false,
-    'ObjectSchema.additionalProperties should be false'
-  )
+  if( objectSchema.additionalProperties !== false )
+    throw TypeError( `${ name }.additionalProperties should be false` )
 
-  assertObjectSchemaProperties( objectSchema )
+  assertObjectSchemaProperties( objectSchema, name )
 }
 
-export const assertObjectSchemaProperties = objectSchema => {
-  assert(
-    is.object( objectSchema.properties ),
-    'ObjectSchema.properties should be an object'
-  )
+export const assertObjectSchemaProperties = (
+  objectSchema, name = 'ObjectSchema'
+) => {
+  if( !is.object( objectSchema.properties ) )
+    throw TypeError( `${ name }.properties should be an object` )
 
   Object.keys( objectSchema.properties ).forEach( key => {
-    assertObjectSchemaProperty( objectSchema, key )
+    assertObjectSchemaProperty( objectSchema, key, name )
   })
 }
 
-export const assertObjectSchemaProperty = ( objectSchema, key: string ) => {
-  assertSubschema( objectSchema.properties[ key ] )
-  assert(
-    !isEntitySchema( objectSchema.properties[ key ] ),
-    `ObjectSchema.properties['${ key }'] should not be an EntitySchema`
+export const assertObjectSchemaProperty = (
+  objectSchema, key: string, name = 'ObjectSchema'
+) => {
+  assertSubschema(
+    objectSchema.properties[ key ],
+    `${ name }.properties['${ key }']`
   )
+
+  if ( isEntitySchema( objectSchema.properties[ key ] ) )
+    throw TypeError(
+      `${ name }.properties['${ key }'] should not be an EntitySchema`
+    )
 }

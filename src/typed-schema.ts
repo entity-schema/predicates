@@ -1,16 +1,17 @@
-import * as assert from 'assert'
-import { JSONSchema4 } from 'json-schema'
 import { is } from '@mojule/is'
+import { JSONSchema4 } from 'json-schema'
 import { isNonEmptyString } from './util'
 
-export type TypedSchemaType = 'string' | 'number' | 'integer' | 'boolean' | 'object' | 'array'
+export type TypedSchemaType = (
+  'string' | 'number' | 'integer' | 'boolean' | 'object' | 'array'
+)
 
 export interface TypedSchema extends JSONSchema4 {
   title: string,
   type: TypedSchemaType
 }
 
-const schemaTypes = [
+const schemaTypes: TypedSchemaType[] = [
   'string', 'number', 'integer', 'boolean', 'object', 'array'
 ]
 
@@ -24,30 +25,24 @@ export const isTypedSchema = ( value ) : value is TypedSchema => {
   return true
 }
 
-export const assertTypedSchema = typedSchema => {
-  assert(
-    is.object( typedSchema ),
-    'TypedSchema should be an object'
-  )
+export const assertTypedSchema = ( typedSchema, name = 'TypedSchema' ) => {
+  if ( !is.object( typedSchema ))
+    throw TypeError( `${ name } should be an object` )
 
-  assert(
-    isNonEmptyString( typedSchema.title ),
-    'TypedSchema.title should be a non-empty string'
-  )
+  if ( !isNonEmptyString( typedSchema.title ) )
+    throw TypeError( `${ name }.title should be a non-empty string` )
 
-  assert(
-    schemaTypes.includes( typedSchema.type ),
-    `TypedSchema type property should be one of ${
-      JSON.stringify( schemaTypes )
-    }`
-  )
+  if ( !schemaTypes.includes( typedSchema.type ) )
+    throw TypeError(
+      `${ name }.type should be one of ${ JSON.stringify( schemaTypes ) }`
+    )
 }
 
-export const assertTypedSchemaOf = ( typedSchema, type: TypedSchemaType ) => {
+export const assertTypedSchemaOf = (
+  typedSchema, type: TypedSchemaType, name = 'TypedSchema'
+) => {
   assertTypedSchema( typedSchema )
 
-  assert.strictEqual(
-    typedSchema.type, type,
-    `TypedSchema.type should be '${ type }'`
-  )
+  if( typedSchema.type !== type )
+    throw TypeError( `${ name }.type should be '${ type }'` )
 }

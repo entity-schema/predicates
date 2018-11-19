@@ -4,3 +4,4 @@ export interface EnumSchema extends StringSchema {
     _esTitles: string[];
 }
 export declare const isEnumSchema: (value: any) => value is EnumSchema;
+export declare const assertEnumSchema: (enumSchema: any, name?: string) => void;

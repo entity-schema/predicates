@@ -1,0 +1,31 @@
+{
+    "id": "http://workingspec.com/schema/disk-file",
+    "title": "Disk File",
+    "description": "A file stored on disk",
+    "type": "object",
+    "format": "entity-schema",
+    "properties": {
+        "name": {
+            "$ref": "http://workingspec.com/schema/name"
+        },
+        "path": {
+            "$ref": "http://workingspec.com/schema/file-path"
+        },
+        "meta": {
+            "$ref": "http://workingspec.com/schema/file-meta"
+        },
+        "tags": {
+            "title": "Tags",
+            "type": "array",
+            "items": {
+                "$ref": "http://workingspec.com/schema/tag"
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "name",
+        "path",
+        "meta"
+    ]
+}

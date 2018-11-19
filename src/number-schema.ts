@@ -14,6 +14,6 @@ export const isNumberSchema = ( value ): value is NumberSchema => {
   return true
 }
 
-export const assertNumberSchema = numberSchema => {
-  assertTypedSchemaOf( numberSchema, 'number' )
+export const assertNumberSchema = ( numberSchema, name = 'NumberSchema' ) => {
+  assertTypedSchemaOf( numberSchema, 'number', name )
 }

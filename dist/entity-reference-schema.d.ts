@@ -8,3 +8,4 @@ export interface EntityReferenceSchema extends ObjectSchema {
     };
 }
 export declare const isEntityReferenceSchema: (value: any) => value is EntityReferenceSchema;
+export declare const assertEntityReferenceSchema: (entityReferenceSchema: any, name?: string) => void;

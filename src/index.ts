@@ -15,6 +15,29 @@ import { isNumberSchema } from './number-schema'
 import { isBooleanSchema } from './boolean-schema'
 import { isArraySchema } from './array-schema'
 import { isIntegerSchema } from './integer-schema'
+import { isSecuritySchema } from './security-schema'
+import { isUniquePropertySchema } from './unique-property-schema'
+
+export { assertOneOfSchema } from './oneof-schema'
+export { assertEntitySchema } from './entity-schema'
+export { assertRootSchema } from './root-schema'
+export { assertEnumSchema } from './enum-schema'
+export { assertRefSchema } from './ref-schema'
+export { assertChildEntitySchema } from './child-entity-schema'
+export { assertConstPropertySchema } from './const-property-schema'
+export { assertEntityReferenceSchema } from './entity-reference-schema'
+export { assertSubschema } from './subschema'
+export { assertTypedSchema } from './typed-schema'
+export {
+  assertObjectSchema, assertObjectSchemaProperties, assertObjectSchemaProperty
+} from './object-schema'
+export { assertStringSchema } from './string-schema'
+export { assertNumberSchema } from './number-schema'
+export { assertBooleanSchema } from './boolean-schema'
+export { assertArraySchema } from './array-schema'
+export { assertIntegerSchema } from './integer-schema'
+export { assertSecuritySchema } from './security-schema'
+export { assertUniquePropertySchema } from './unique-property-schema'
 
 // object key order is important - will match in that order when finding types!
 export const predicates = {
@@ -32,8 +55,10 @@ export const predicates = {
   rootSchema: isRootSchema,
   refSchema: isRefSchema,
   enumSchema: isEnumSchema,
+  uniquePropertySchema: isUniquePropertySchema,
+  securitySchema: isSecuritySchema,
   typedSchema: isTypedSchema,
-  subSchema: isSubschema,
+  subschema: isSubschema,
   anySchema: ( value ): value is any => is.object( value )
 }
 

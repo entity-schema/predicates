@@ -1,6 +1,6 @@
-import * as assert from 'assert'
 import { is } from '@mojule/is'
 import { StringSchema, assertStringSchema } from './string-schema'
+import { isNonEmptyArray } from './util';
 
 export interface EnumSchema extends StringSchema {
   enum: string[]
@@ -17,31 +17,23 @@ export const isEnumSchema = ( value ) : value is EnumSchema => {
   return true
 }
 
-export const assertEnumSchema = enumSchema => {
-  assertStringSchema( enumSchema )
+export const assertEnumSchema = ( enumSchema, name = 'EnumSchema' ) => {
+  assertStringSchema( enumSchema, name )
 
-  assert(
-    is.array( enumSchema.enum ) && enumSchema.length > 0,
-    'EnumSchema.enum should be a non-empty array'
-  )
+  if( !isNonEmptyArray<string>( enumSchema.enum ) )
+    throw TypeError( `${ name }.enum should be a non-empty array` )
 
-  assert(
-    enumSchema.enum.every( is.string ),
-    'EnumSchema.enum should be an array of strings'
-  )
+  if ( !enumSchema.enum.every( is.string ) )
+    throw TypeError( `${ name }.enum should be an array of strings` )
 
-  assert(
-    is.array( enumSchema._esTitles ) && enumSchema.length > 0,
-    'EnumSchema._esTitles should be a non-empty array'
-  )
+  if ( !isNonEmptyArray<string>( enumSchema._esTitles ) )
+    throw TypeError( `${ name }._esTitles should be a non-empty array` )
 
-  assert(
-    enumSchema._esTitles.every( is.string ),
-    'EnumSchema._esTitles should be an array of strings'
-  )
+  if ( !enumSchema._esTitles.every( is.string ) )
+    throw TypeError( `${ name }._esTitles should be an array of strings` )
 
-  assert.strictEqual(
-    enumSchema.enum.length, enumSchema._esTitles.length,
-    'EnumSchema.enum and EnumSchema._esTitles should be the same length'
-  )
+  if ( enumSchema.enum.length !== enumSchema._esTitles.length )
+    throw TypeError(
+      `${ name }.enum and ${ name }._esTitles should be the same length`
+    )
 }

@@ -1,0 +1,5 @@
+{
+    "id": "http://example.com/schema/number-pass",
+    "title": "A valid NumberSchema",
+    "type": "number"
+}

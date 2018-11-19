@@ -5,3 +5,4 @@ export interface ConstPropertySchema extends StringSchema {
     default: string;
 }
 export declare const isConstPropertySchema: (value: any) => value is ConstPropertySchema;
+export declare const assertConstPropertySchema: (constPropertySchema: any, name?: string) => void;

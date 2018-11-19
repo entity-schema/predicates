@@ -1,4 +1,3 @@
-import * as assert from 'assert'
 import { ObjectSchema, assertObjectSchema } from './object-schema'
 import { isNonEmptyString } from './util'
 
@@ -17,10 +16,12 @@ export const isEntitySchema = ( value ) : value is EntitySchema => {
   return true
 }
 
-export const assertEntitySchema = entitySchema => {
-  assertObjectSchema( entitySchema )
-  assert(
-    isNonEmptyString( entitySchema.id ),
-    'EntitySchema.id must be a non-empty string'
-  )
+export const assertEntitySchema = ( entitySchema, name = 'EntitySchema' ) => {
+  assertObjectSchema( entitySchema, name )
+
+  if ( !isNonEmptyString( entitySchema.id ) )
+    throw TypeError( `${ name }.id must be a non-empty string` )
+
+  if( entitySchema.format !== 'entity-schema' )
+    throw TypeError( `${ name }.format should be 'entity-schema'` )
 }

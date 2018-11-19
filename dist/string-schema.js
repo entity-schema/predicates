@@ -2,10 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const typed_schema_1 = require("./typed-schema");
 exports.isStringSchema = (value) => {
-    if (!typed_schema_1.isTypedSchema(value))
+    try {
+        exports.assertStringSchema(value);
+    }
+    catch (_a) {
         return false;
-    if (value.type !== 'string')
-        return false;
+    }
     return true;
+};
+exports.assertStringSchema = (stringSchema, name = 'StringSchema') => {
+    typed_schema_1.assertTypedSchemaOf(stringSchema, 'string', name);
 };
 //# sourceMappingURL=string-schema.js.map

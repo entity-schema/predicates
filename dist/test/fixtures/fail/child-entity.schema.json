@@ -1,0 +1,65 @@
+{
+    "id": "http://example.com/schema/child-entity-fail",
+    "title": "Invalid ChildEntitySchema",
+    "anyOf": [
+        {
+            "id": "http://example.com/schema/child-entity-no-parent-key",
+            "title": "No Parent Key",
+            "description": "no parent key",
+            "type": "object",
+            "format": "entity-schema",
+            "properties": {
+                "parent": {
+                    "$ref": "http://example.com/schema/parent-reference"
+                }
+            },
+            "required": ["parent"],
+            "additionalProperties": false,
+            "_expect": "ChildEntitySchema._esParentKey should be a string"
+        },
+        {
+            "id": "http://example.com/schema/child-entity-no-property",
+            "title": "No Parent Schema",
+            "description": "no parent schema",
+            "type": "object",
+            "format": "entity-schema",
+            "_esParentKey": "parent",
+            "properties": {},
+            "required": ["parent"],
+            "additionalProperties": false,
+            "_expect": "ChildEntitySchema.properties['parent'] should be an EntityReferenceSchema or a RefSchema"
+        },
+        {
+            "id": "http://example.com/schema/child-entity-no-required",
+            "title": "No Required",
+            "description": "no required array",
+            "type": "object",
+            "format": "entity-schema",
+            "_esParentKey": "parent",
+            "properties": {
+                "parent": {
+                    "$ref": "http://example.com/schema/parent-reference"
+                }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "_expect": "ChildEntitySchema.required should be a non-empty array"
+        },
+        {
+            "id": "http://example.com/schema/child-entity-not-in-required",
+            "title": "Not in Required",
+            "description": "not in required array",
+            "type": "object",
+            "format": "entity-schema",
+            "_esParentKey": "parent",
+            "properties": {
+                "parent": {
+                    "$ref": "http://example.com/schema/parent-reference"
+                }
+            },
+            "required": ["bob"],
+            "additionalProperties": false,
+            "_expect": "ChildEntitySchema.required should include 'parent'"
+        }
+    ]
+}

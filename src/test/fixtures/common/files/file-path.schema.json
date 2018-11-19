@@ -1,0 +1,6 @@
+{
+  "id": "http://workingspec.com/schema/file-path",
+  "title": "Path",
+  "description": "Path to this file",
+  "type": "string"
+}

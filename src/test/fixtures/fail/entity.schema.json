@@ -1,0 +1,32 @@
+{
+  "id": "http://example.com/schema/entity-fail",
+  "title": "Invalid EntitySchema",
+  "anyOf": [
+    {
+      "title": "No ID",
+      "description": "no id",
+      "type": "object",
+      "format": "entity-schema",
+      "properties": {
+        "name": {
+          "$ref": "http://example.com/schema/name"
+        }
+      },
+      "additionalProperties": false,
+      "_expect": "EntitySchema.id must be a non-empty string"
+    },
+    {
+      "id": "http://example.com/schema/entity-no-format",
+      "title": "No Format",
+      "description": "no format",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "http://example.com/schema/name"
+        }
+      },
+      "additionalProperties": false,
+      "_expect": "EntitySchema.format should be 'entity-schema'"
+    }
+  ]
+}

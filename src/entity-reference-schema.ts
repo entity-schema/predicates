@@ -11,18 +11,29 @@ export interface EntityReferenceSchema extends ObjectSchema {
   }
 }
 
-export const isEntityReferenceSchema = ( value ) : value is EntityReferenceSchema => {
-  try {
-    assertEntityReferenceSchema( value )
-  } catch {
-    return false
+export const isEntityReferenceSchema =
+  ( value ) : value is EntityReferenceSchema => {
+    try {
+      assertEntityReferenceSchema( value )
+    } catch {
+      return false
+    }
+
+    return true
   }
 
-  return true
-}
+export const assertEntityReferenceSchema = (
+  entityReferenceSchema, name = 'EntityReferenceSchema'
+) => {
+  assertObjectSchema( entityReferenceSchema, name )
 
-export const assertEntityReferenceSchema = entityReferenceSchema => {
-  assertObjectSchema( entityReferenceSchema )
-  assertStringSchema( entityReferenceSchema.properties.entityId )
-  assertConstPropertySchema( entityReferenceSchema.properties.entityType )
+  assertStringSchema(
+    entityReferenceSchema.properties.entityId,
+    `${ name }.properties.entityId`
+  )
+
+  assertConstPropertySchema(
+    entityReferenceSchema.properties.entityType,
+    `${ name }.properties.entityType`
+  )
 }

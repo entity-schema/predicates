@@ -14,6 +14,6 @@ export const isStringSchema = ( value ): value is StringSchema => {
   return true
 }
 
-export const assertStringSchema = stringSchema => {
-  assertTypedSchemaOf( stringSchema, 'string' )
+export const assertStringSchema = ( stringSchema, name = 'StringSchema' ) => {
+  assertTypedSchemaOf( stringSchema, 'string', name )
 }

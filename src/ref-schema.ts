@@ -1,6 +1,6 @@
-import * as assert from 'assert'
 import { JSONSchema4 } from 'json-schema'
 import { is } from '@mojule/is'
+import { isNonEmptyString } from './util'
 
 export interface RefSchema extends JSONSchema4 {
   $ref: string
@@ -16,7 +16,10 @@ export const isRefSchema = ( value ) : value is RefSchema => {
   return true
 }
 
-export const assertRefSchema = refSchema => {
-  assert( is.object( refSchema ), 'RefSchema should be an object' )
-  assert( is.string( refSchema.$ref ), 'RefSchema.$ref should be a string' )
+export const assertRefSchema = ( refSchema, name = 'RefSchema' ) => {
+  if( !is.object( refSchema ) )
+    throw TypeError( `${ name } should be an object` )
+
+  if( !isNonEmptyString( refSchema.$ref ) )
+    throw TypeError( `${ name }.$ref should be a non-empty string` )
 }

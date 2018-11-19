@@ -14,6 +14,8 @@ export const isIntegerSchema = ( value ): value is IntegerSchema => {
   return true
 }
 
-export const assertIntegerSchema = integerSchema => {
-  assertTypedSchemaOf( integerSchema, 'integer' )
+export const assertIntegerSchema = (
+  integerSchema, name = 'IntegerSchema'
+) => {
+  assertTypedSchemaOf( integerSchema, 'integer', name )
 }

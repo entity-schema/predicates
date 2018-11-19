@@ -3,7 +3,7 @@ import { TypedSchema, assertTypedSchemaOf } from './typed-schema'
 
 export interface ArraySchema extends TypedSchema {
   type: 'array'
-  items?: Subschema
+  items: Subschema
 }
 
 export const isArraySchema = ( value ): value is ArraySchema => {
@@ -16,10 +16,8 @@ export const isArraySchema = ( value ): value is ArraySchema => {
   return true
 }
 
-export const assertArraySchema = arraySchema => {
-  assertTypedSchemaOf( arraySchema, 'array' )
+export const assertArraySchema = ( arraySchema, name = 'ArraySchema' ) => {
+  assertTypedSchemaOf( arraySchema, 'array', name )
 
-  if ( arraySchema.items ){
-    assertSubschema( arraySchema.items )
-  }
+  assertSubschema( arraySchema.items, `${ name }.items` )
 }

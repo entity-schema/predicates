@@ -4,4 +4,4 @@ export interface EntitySchema extends ObjectSchema {
     format: 'entity-schema';
 }
 export declare const isEntitySchema: (value: any) => value is EntitySchema;
-export declare const assertEntitySchema: (value: any) => void;
+export declare const assertEntitySchema: (entitySchema: any, name?: string) => void;

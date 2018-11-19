@@ -1,0 +1,12 @@
+{
+    "id": "http://example.com/schema/boolean-fail",
+    "title": "Invalid BooleanSchema",
+    "anyOf": [
+        {
+            "title": "Wrong Type",
+            "description": "wrong type",
+            "type": "object",
+            "_expect": "BooleanSchema.type should be 'boolean'"
+        }
+    ]
+}

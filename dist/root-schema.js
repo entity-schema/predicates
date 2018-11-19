@@ -1,12 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_1 = require("@mojule/is");
 const typed_schema_1 = require("./typed-schema");
+const util_1 = require("./util");
 exports.isRootSchema = (value) => {
-    if (!typed_schema_1.isTypedSchema(value))
+    try {
+        exports.assertRootSchema(value);
+    }
+    catch (_a) {
         return false;
-    if (!is_1.is.string(value.id))
-        return false;
+    }
     return true;
+};
+exports.assertRootSchema = (rootSchema, name = 'RootSchema') => {
+    typed_schema_1.assertTypedSchema(rootSchema, name);
+    if (!util_1.isNonEmptyString(rootSchema.id))
+        throw TypeError(`${name}.id should be a non-empty string`);
 };
 //# sourceMappingURL=root-schema.js.map

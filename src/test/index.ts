@@ -1,27 +1,119 @@
 import * as assert from 'assert'
-import { workingSpecSchemas, workingSpecSchemaMap } from './fixtures/working-spec'
-import { predicates } from '..'
+
+import { passSchemas, passSchemaMap } from './fixtures/pass'
+
+import {
+  predicates, assertRootSchema, assertEntitySchema, assertChildEntitySchema,
+  assertArraySchema, assertEntityReferenceSchema, assertConstPropertySchema,
+  assertStringSchema, assertBooleanSchema, assertUniquePropertySchema,
+  assertEnumSchema, assertNumberSchema, assertOneOfSchema, assertSubschema
+} from '..'
+
+import { failSchemaMap } from './fixtures/fail'
 
 describe( 'entity schema predicates', () => {
-  describe( 'from working spec', () => {
-    describe( 'all are root schema', () => {
-      workingSpecSchemas.forEach( schema => {
-        it( `${ schema.title } is root schema`, () => {
-          assert( predicates.rootSchema( schema ) )
-        } )
+  describe( 'pass', () => {
+    const { enumPass, numberPass, oneOfPass } = passSchemaMap
+
+    describe( 'EnumSchema', () => {
+      it( 'isEnumSchema', () => {
+        assert( predicates.enumSchema( enumPass ) )
+      } )
+
+      it( 'assertEnumSchema', () => {
+        assertEnumSchema( enumPass, 'enumPass' )
       } )
     } )
 
-    describe( 'entity schema', () => {
-      const { brand, company, detail, getUri, product } = workingSpecSchemaMap
+    describe( 'NumberSchema', () => {
+      it( 'isNumberSchema', () => {
+        assert( predicates.numberSchema( numberPass ) )
+      } )
 
-      const entities = [ brand, company, detail, getUri, product ]
+      it( 'assertNumberSchema', () => {
+        assertNumberSchema( numberPass, 'numberPass' )
+      } )
+    } )
 
-      entities.forEach( schema => {
-        it( `${ schema.title } is entity schema`, () => {
-          assert( predicates.entitySchema( schema ) )
-        })
-      })
+    describe( 'OneOfSchema', () => {
+      it( 'isOneOfSchema', () => {
+        assert( predicates.oneOfSchema( oneOfPass ) )
+      } )
+
+      it( 'assertOneOfSchema', () => {
+        assertOneOfSchema( oneOfPass, 'oneOfPass' )
+      } )
+    } )
+
+    describe( 'SubSchema', () => {
+      it( 'isSubschema', () => {
+        assert( predicates.subschema( oneOfPass ) )
+      } )
+
+      it( 'assertSubschema', () => {
+        assertSubschema( oneOfPass, 'oneOfPass' )
+      } )
     })
+  })
+
+  describe( 'fail', () => {
+    const {
+      arrayFail, booleanFail, childEntityFail, constPropertyFail, entityFail
+    } = failSchemaMap
+
+    const assertFails = ( name: string, schema, predicate: ( value ) => boolean, assertion: ( value ) => void ) => {
+      describe( name, () => {
+        schema.anyOf.forEach( schema => {
+          it( `fails predicate because ${ schema.description }`, () => {
+            assert( !predicate( schema ) )
+          } )
+
+          it( `assert throws because ${ schema.description }`, () => {
+            assert.throws(
+              () => assertion( schema ),
+              {
+                name: 'TypeError',
+                message: schema._expect
+              }
+            )
+          } )
+        } )
+      } )
+    }
+
+    assertFails(
+      'ArraySchema',
+      arrayFail,
+      predicates.arraySchema,
+      assertArraySchema
+    )
+
+    assertFails(
+      'BooleanSchema',
+      booleanFail,
+      predicates.booleanSchema,
+      assertBooleanSchema
+    )
+
+    assertFails(
+      'ChildEntitySchema',
+      childEntityFail,
+      predicates.childEntitySchema,
+      assertChildEntitySchema
+    )
+
+    assertFails(
+      'ConstPropertySchema',
+      constPropertyFail,
+      predicates.constPropertySchema,
+      assertConstPropertySchema
+    )
+
+    assertFails(
+      'EntitySchema',
+      entityFail,
+      predicates.entitySchema,
+      assertEntitySchema
+    )
   })
 })

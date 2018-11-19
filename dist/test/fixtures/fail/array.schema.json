@@ -1,0 +1,31 @@
+{
+    "id": "http://example.com/schema/array-fail",
+    "title": "Invalid ArraySchema",
+    "anyOf": [
+        {
+            "description": "no title",
+            "type": "array",
+            "items": {
+                "title": "Title",
+                "type": "string"
+            },
+            "_expect": "TypedSchema.title should be a non-empty string"
+        },
+        {
+            "title": "Wrong Type",
+            "description": "wrong type",
+            "type": "object",
+            "items": {
+                "title": "Title",
+                "type": "string"
+            },
+            "_expect": "ArraySchema.type should be 'array'"
+        },
+        {
+            "title": "No Items",
+            "description": "no items",
+            "type": "array",
+            "_expect": "ArraySchema.items should be RefSchema, TypedSchema or OneOfSchema"
+        }
+    ]
+}
