@@ -22,24 +22,24 @@ Schema do it that way instead)
 Entity Schema consists of the following schema types. Some of them are unions of
 other types. Documentation for the format of each appears below.
 
-- TypedSchema
-- ArraySchema
-- BooleanSchema
-- IntegerSchema
-- NumberSchema
-- ObjectSchema
-- StringSchema
-- RefSchema
-- OneOfSchema
-- Subschema
-- RootSchema
-- EntitySchema
-- ChildEntitySchema
-- EnumSchema
-- ConstPropertySchema
-- EntityReferenceSchema
-- SecuritySchema
-- UniquePropertySchema
+- [TypedSchema](#typedschema)
+- [ArraySchema](#typedschema)
+- [BooleanSchema](#typedschema)
+- [IntegerSchema](#typedschema)
+- [NumberSchema](#typedschema)
+- [ObjectSchema](#objectschema)
+- [StringSchema](#typedschema)
+- [RefSchema](#refschema)
+- [OneOfSchema](#oneofschema)
+- [Subschema](#subschema)
+- [RootSchema](#rootschema)
+- [EntitySchema](#entityschema)
+- [ChildEntitySchema](#childentityschema)
+- [EnumSchema](#enumschema)
+- [ConstPropertySchema](#constpropertyschema)
+- [EntityReferenceSchema](#entityreferenceschema)
+- [SecuritySchema](#securityschema)
+- [UniquePropertySchema](#uniquepropertyschema)
 
 The package exports:
 
@@ -117,7 +117,7 @@ must implement at least this interface
 
 ### TypedSchema
 
-[src/predicates/typed-schema.ts](/src/predicates/typed-schema.ts)
+[src/typed-schema.ts](/src/typed-schema.ts)
 
 All schema and subschema should have at least a title and type, with the
 exception that a subschema can alternatively be a `RefSchema`. The `title`
@@ -138,18 +138,23 @@ Only the following types are supported:
 
 Additionally, each of the types has its own definition:
 
-[src/predicates/array-schema.ts](/src/predicates/array-schema.ts)
-[src/predicates/boolean-schema.ts](/src/predicates/boolean-schema.ts)
-[src/predicates/integer-schema.ts](/src/predicates/integer-schema.ts)
-[src/predicates/number-schema.ts](/src/predicates/number-schema.ts)
-[src/predicates/object-schema.ts](/src/predicates/object-schema.ts)
-[src/predicates/string-schema.ts](/src/predicates/string-schema.ts)
+[src/array-schema.ts](/src/array-schema.ts)
+
+[src/boolean-schema.ts](/src/boolean-schema.ts)
+
+[src/integer-schema.ts](/src/integer-schema.ts)
+
+[src/number-schema.ts](/src/number-schema.ts)
+
+[src/object-schema.ts](/src/object-schema.ts)
+
+[src/string-schema.ts](/src/string-schema.ts)
 
 `ObjectSchema` has some additional constraints, see below
 
 ### RefSchema
 
-[src/predicates/ref-schema.ts](/src/predicates/ref-schema.ts)
+[src/ref-schema.ts](/src/ref-schema.ts)
 
 The schema referenced by a `RefSchema` must implement the `RootSchema`
 interface, see below.
@@ -162,7 +167,7 @@ interface, see below.
 
 ### OneOfSchema
 
-[src/predicates/oneof-schema.ts](/src/predicates/oneof-schema.ts)
+[src/oneof-schema.ts](/src/oneof-schema.ts)
 
 A schema indicating that the value can match one of several schema
 
@@ -191,7 +196,7 @@ differentiate them
 
 ### Subschema
 
-[src/predicates/subschema.ts](/src/predicates/subschema.ts)
+[src/subschema.ts](/src/subschema.ts)
 
 Any one of `TypedSchema`, `RefSchema` or `OneOfSchema`
 
@@ -212,7 +217,7 @@ referred to be a `RefSchema`, it must implement at least this interface.
 
 ### ObjectSchema
 
-[src/predicates/object-schema.ts](/src/predicates/object-schema.ts)
+[src/object-schema.ts](/src/object-schema.ts)
 
 Represents a `TypedSchema` of type `object`
 
@@ -241,7 +246,7 @@ The `additionalProperties` property must be `false`
 
 ### EntitySchema
 
-[src/predicates/entity-schema.ts](/src/predicates/entity-schema.ts)
+[src/entity-schema.ts](/src/entity-schema.ts)
 
 Represents an important entity in the application - these are typically the kind
 of entities that you would perist to a database, return from an API, populate a
@@ -274,7 +279,7 @@ An entity *should* have a `name: string` property, but this is not enforced
 
 ### EntityReferenceSchema
 
-[src/predicates/entity-reference-schema.ts](/src/predicates/entity-reference-schema.ts)
+[src/entity-reference-schema.ts](/src/entity-reference-schema.ts)
 
 An `ObjectSchema` that links to an `EntitySchema` *instance*
 
@@ -314,7 +319,7 @@ match the `title` field of the linked `EntitySchema`
 
 ### ChildEntitySchema
 
-[src/predicates/child-entity-schema.ts](/src/predicates/child-entity-schema.ts)
+[src/child-entity-schema.ts](/src/child-entity-schema.ts)
 
 An `EntitySchema` which has a link to a parent `EntitySchema`
 
@@ -347,7 +352,7 @@ The property it points to must be an `EntityReferenceSchema`
 
 ### UniquePropertySchema
 
-[src/predicates/unique-property-schema.ts](/src/predicates/unique-property-schema.ts)
+[src/unique-property-schema.ts](/src/unique-property-schema.ts)
 
 Used to define that a `TypedSchema` property of an `EntitySchema` must be
 unique across *instances*
@@ -368,7 +373,7 @@ all *instances* of this `EntitySchema`
 
 ### ConstPropertySchema
 
-[src/predicates/const-property-schema.ts](/src/predicates/const-property-schema.ts)
+[src/const-property-schema.ts](/src/const-property-schema.ts)
 
 A `StringSchema` used as a discriminator - a property which must match a certain
 value
@@ -390,7 +395,7 @@ specified by `default`
 
 ### EnumSchema
 
-[src/predicates/enum-schema.ts](/src/predicates/enum-schema.ts)
+[src/enum-schema.ts](/src/enum-schema.ts)
 
 A schema representing an enum of strings
 
