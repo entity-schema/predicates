@@ -2,6 +2,102 @@
 
 Predicates and type guards for Entity Schema
 
+`npm install @entity-schema/predicates`
+
+## Usage
+
+Entity Schema consists of the following schema types. Some of them are unions of
+other types. Documentation for the format of each appears below.
+
+- TypedSchema
+- ArraySchema
+- BooleanSchema
+- IntegerSchema
+- NumberSchema
+- ObjectSchema
+- StringSchema
+- RefSchema
+- OneOfSchema
+- Subschema
+- RootSchema
+- EntitySchema
+- ChildEntitySchema
+- EnumSchema
+- ConstPropertySchema
+- EntityReferenceSchema
+- SecuritySchema
+- UniquePropertySchema
+
+The package exports:
+
+- A TypeScript interface for each schema type
+- A predicate for each schema type, testing if a schema instance matches the
+  expected inteface
+- An assertion function for each schema type, which throws a TypeError if a
+  schema instance does not match the expected interface. The error message
+  will explicitly tell you what was wrong with the schema
+
+### predicate example
+
+```javascript
+const fooSchema = require( './foo.schema.json' )
+const { isTypedSchema } = require( '@entity-schema/predicates' )
+
+if( isTypedSchema( fooSchema ) ){
+  // ...
+}
+```
+
+### assertion example
+
+```javascript
+const fooSchema = require( './foo.schema.json' )
+const { assertTypedSchema } = require( '@entity-schema/predicates' )
+
+try {
+  assertTypedSchema( fooSchema )
+} catch( err ){
+  console.error( err )
+}
+```
+
+Additionally, it exports `predicates` and `predicateUtils`
+
+### predicates
+
+`predicates` is an object mapping `camelCase` names for each schema type to its
+associated predicate function. It is ordered by specificity so that the keys
+can be iterated over by eg a higher order function like Array.find to eg find
+the most specific type for a given schema
+
+### predicateUtils
+
+Uses `@mojule/is` to provide some additional functions for using with the
+predicates:
+
+```js
+const fooSchema = require( './foo.schema.json' )
+const barSchema = require( './bar.schema.json' )
+const { predicateUtils } = require( '@entity-schema/predicates' )
+
+const { isOnly, some, every, of, allOf } = predicateUtils
+
+// will log true if fooSchema only matches the refSchema interface
+console.log( isOnly( fooSchema, 'refSchema' ) )
+
+// will log true if fooSchema implements at least one of the provided interfaces
+console.log( some( fooSchema, 'refSchema', 'typedSchema' ) )
+
+// will log true if fooSchema implements all of the provided interfaces
+console.log( every( fooSchema, 'rootSchema', 'objectSchema' ) )
+
+// will return the name of the first predicate that matches
+console.log( of( fooSchema ) )
+
+// return return all of the matching interfaces
+console.log( allOf( fooSchema ) )
+```
+
 ## Entity Schema
 
 A subset of JSON Schema and associated conventions for defining *entities*.
@@ -17,6 +113,10 @@ Schema do it that way instead)
 
 ## Schema Types
 
+The most basic schema in the Entity Schema system is `TypedSchema` - with the
+exception of `RefSchema` and `OneOfSchema`, all other schema in the system
+must implement at least this interface
+
 ### TypedSchema
 
 [src/predicates/typed-schema.ts](/src/predicates/typed-schema.ts)
@@ -25,6 +125,12 @@ All schema and subschema should have at least a title and type, with the
 exception that a subschema can alternatively be a `RefSchema`. The `title`
 property should be unique within the application.
 
+Only the following types are supported:
+
+```ts
+'string' | 'number' | 'integer' | 'boolean' | 'object' | 'array'
+```
+
 ```json
 {
   "title": "Foo",
@@ -32,24 +138,71 @@ property should be unique within the application.
 }
 ```
 
+Additionally, each of the types has its own definition:
+
+[src/predicates/array-schema.ts](/src/predicates/array-schema.ts)
+[src/predicates/boolean-schema.ts](/src/predicates/boolean-schema.ts)
+[src/predicates/integer-schema.ts](/src/predicates/integer-schema.ts)
+[src/predicates/number-schema.ts](/src/predicates/number-schema.ts)
+[src/predicates/object-schema.ts](/src/predicates/object-schema.ts)
+[src/predicates/string-schema.ts](/src/predicates/string-schema.ts)
+
+`ObjectSchema` has some additional constraints, see below
+
 ### RefSchema
 
 [src/predicates/ref-schema.ts](/src/predicates/ref-schema.ts)
 
-These are the only exception to the `title` and `type` rule, but the schema they
-point to must be a `RootSchema`, which must have both of those fields
+The schema referenced by a `RefSchema` must implement the `RootSchema`
+interface, see below.
+
+```json
+{
+  "$ref": "http://example.com/schema/foo"
+}
+```
+
+### OneOfSchema
+
+[src/predicates/oneof-schema.ts](/src/predicates/oneof-schema.ts)
+
+A schema indicating that the value can match one of several schema
+
+It must have a `title` property
+
+There should be a discriminator of some kind so that one can tell which type it
+is just be viewing an *instance*
+
+If oneOf is a list of `EntityReferenceSchema` then the discriminator should be
+`entityType` - otherwise use a property such as `kind` on the subschemas to
+differentiate them
+
+```json
+{
+  "title": "Payload",
+  "oneOf": [
+    {
+      "$ref": "http://example.com/schema/document-payload-generic"
+    },
+    {
+      "$ref": "http://example.com/schema/document-payload-unity"
+    }
+  ]
+}
+```
 
 ### Subschema
 
 [src/predicates/subschema.ts](/src/predicates/subschema.ts)
 
-One of either `TypedSchema` or `RefSchema`
+Any one of `TypedSchema`, `RefSchema` or `OneOfSchema`
 
 ### RootSchema
 
 Represents a `TypedSchema` with a unique ID. The `id` and `title` properties
 should be unique within the application. The `title` should typically be a human
-readable string based on the last slug of the `id` URI
+readable string based on the last slug of the `id` URI. If a schema needs to be
+referred to be a `RefSchema`, it must implement at least this interface.
 
 ```json
 {
@@ -63,12 +216,10 @@ readable string based on the last slug of the `id` URI
 
 [src/predicates/object-schema.ts](/src/predicates/object-schema.ts)
 
-Represents a RootSchema of type `object`
+Represents a `TypedSchema` of type `object`
 
-An `ObjectSchema` must be a `RootSchema` of `type: 'object'`
-
-It can have simple `TypeSchema` as subschema but must not have `EntitySchema` as
-subschema - in this case use `EntityReferenceSchema` instead
+It can have simple `TypedSchema` as property subschemas but must not have any
+`EntitySchema` as a property - in this case use `EntityReferenceSchema` instead
 
 The `additionalProperties` property must be `false`
 
@@ -217,11 +368,11 @@ all *instances* of this `EntitySchema`
 }
 ```
 
-### Const Property Schema
+### ConstPropertySchema
 
 [src/predicates/const-property-schema.ts](/src/predicates/const-property-schema.ts)
 
-A `TypedSchema` used as a discriminator - a property which must match a certain
+A `StringSchema` used as a discriminator - a property which must match a certain
 value
 
 The `enum` property array must have a single item which matches the value
@@ -243,7 +394,7 @@ specified by `default`
 
 [src/predicates/enum-schema.ts](/src/predicates/enum-schema.ts)
 
-A schema representing a `TypedSchema` enum
+A schema representing an enum of strings
 
 The `enum` keyword should list possible values
 
@@ -262,33 +413,4 @@ must have the same length
     "Foo", "Bar", "Baz"
   ]
 }
-```
-
-### OneOfSchema
-
-[src/predicates/oneof-schema.ts](/src/predicates/oneof-schema.ts)
-
-A schema indicating that the value can match one of several schema
-
-There should be a discriminator of some kind so that one can tell which type it
-is just be viewing an *instance*
-
-If oneOf is a list of `EntityReferenceSchema` then the discriminator should be
-`entityType` - otherwise use a property such as `kind` on the subschemas to
-differentiate them
-
-```json
-{
-  "title": "Payload",
-  "type": "object",
-  "oneOf": [
-    {
-      "$ref": "http://example.com/schema/document-payload-generic"
-    },
-    {
-      "$ref": "http://example.com/schema/document-payload-unity"
-    }
-  ]
-}
-
 ```
