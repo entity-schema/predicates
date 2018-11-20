@@ -1,10 +1,23 @@
 # predicates
 
-Predicates and type guards for Entity Schema
+Predicates/type guards, assertions and interfaces for Entity Schema
 
-`npm install @entity-schema/predicates`
+## Entity Schema
+
+A subset of JSON Schema (and associated conventions) for defining **entities**.
+
+Intent is to reduce duplication of effort by allowing you to define your
+application entities once using JSON Schema, and then from that automatically
+generate APIs, interfaces, database schema, HTML forms for editing and
+creating entities etc
+
+We extend JSON schema but not in any way that affects validation, just extra
+metadata etc, and as little as possible (eg if it can be done with plain JSON
+Schema do it that way instead)
 
 ## Usage
+
+`npm install @entity-schema/predicates`
 
 Entity Schema consists of the following schema types. Some of them are unions of
 other types. Documentation for the format of each appears below.
@@ -30,12 +43,12 @@ other types. Documentation for the format of each appears below.
 
 The package exports:
 
-- A TypeScript interface for each schema type
 - A predicate for each schema type, testing if a schema instance matches the
-  expected inteface
+  expected inteface - the predicates also implement TypeScript type guards
 - An assertion function for each schema type, which throws a TypeError if a
   schema instance does not match the expected interface. The error message
   will explicitly tell you what was wrong with the schema
+- A TypeScript interface or type for each schema type
 
 ### predicate example
 
@@ -61,55 +74,40 @@ try {
 }
 ```
 
-Additionally, it exports `predicates` and `predicateUtils`
+Additionally, it exports `predicates` and `predicateUtils`:
 
 ### predicates
 
-`predicates` is an object mapping `camelCase` names for each schema type to its
+`predicates` is an object mapping `camelCase` names for each schema type to the
 associated predicate function. It is ordered by specificity so that the keys
 can be iterated over by eg a higher order function like Array.find to eg find
 the most specific type for a given schema
 
 ### predicateUtils
 
-Uses `@mojule/is` to provide some additional functions for using with the
-predicates:
+Uses [`@mojule/is`](https://github.com/mojule/mojule/tree/master/packages/is) to
+provide some additional functions for using with the predicates:
 
 ```js
 const fooSchema = require( './foo.schema.json' )
 const barSchema = require( './bar.schema.json' )
 const { predicateUtils } = require( '@entity-schema/predicates' )
 
-const { isOnly, some, every, of, allOf } = predicateUtils
-
 // will log true if fooSchema only matches the refSchema interface
-console.log( isOnly( fooSchema, 'refSchema' ) )
+console.log( predicateUtils.isOnly( fooSchema, 'refSchema' ) )
 
 // will log true if fooSchema implements at least one of the provided interfaces
-console.log( some( fooSchema, 'refSchema', 'typedSchema' ) )
+console.log( predicateUtils.some( fooSchema, 'refSchema', 'typedSchema' ) )
 
 // will log true if fooSchema implements all of the provided interfaces
-console.log( every( fooSchema, 'rootSchema', 'objectSchema' ) )
+console.log( predicateUtils.every( fooSchema, 'rootSchema', 'objectSchema' ) )
 
 // will return the name of the first predicate that matches
-console.log( of( fooSchema ) )
+console.log( predicateUtils.of( fooSchema ) )
 
 // return return all of the matching interfaces
-console.log( allOf( fooSchema ) )
+console.log( predicateUtils.allOf( fooSchema ) )
 ```
-
-## Entity Schema
-
-A subset of JSON Schema and associated conventions for defining *entities*.
-
-Intent is to reduce duplication of effort by allowing you to define your
-application entities once using JSON Schema, and then from that automatically
-generate APIs, interfaces, database schema, HTML forms for editing and
-creating entities etc
-
-We extend JSON schema but not in any way that affects validation, just extra
-metadata etc, and as little as possible (eg if it can be done with plain JSON
-Schema do it that way instead)
 
 ## Schema Types
 
