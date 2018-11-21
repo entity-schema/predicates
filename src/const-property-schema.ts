@@ -2,7 +2,7 @@ import { is } from '@mojule/is'
 import { StringSchema, assertStringSchema } from './string-schema'
 
 export interface ConstPropertySchema extends StringSchema {
-  enum: [ string ],
+  enum: string[],
   readOnly: true,
   default: string
 }

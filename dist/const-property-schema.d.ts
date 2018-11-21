@@ -1,6 +1,6 @@
 import { StringSchema } from './string-schema';
 export interface ConstPropertySchema extends StringSchema {
-    enum: [string];
+    enum: string[];
     readOnly: true;
     default: string;
 }
