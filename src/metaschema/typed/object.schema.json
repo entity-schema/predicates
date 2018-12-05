@@ -1,0 +1,20 @@
+{
+  "id": "http://workingspec.com/metaschema/object-schema",
+  "title": "Object Schema",
+  "type": "object",
+  "properties": {
+    "title": { "$ref": "http://workingspec.com/metaschema/title" },
+    "type": { "$ref": "http://workingspec.com/metaschema/type-object" },
+    "properties": {
+      "title": "Properties",
+      "type": "object",
+      "additionalProperties": { "$ref": "http://workingspec.com/metaschema/subschema" }
+    },
+    "additionalProperties": {
+      "title": "Additional Properties",
+      "type": "boolean",
+      "enum": [ false ]
+    }
+  },
+  "required": [ "title", "type", "properties", "additionalProperties" ]
+}

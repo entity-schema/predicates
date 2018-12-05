@@ -1,0 +1,553 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "TypedSchemaType": {
+            "title": "TypedSchemaType",
+            "enum": [
+                "array",
+                "boolean",
+                "integer",
+                "number",
+                "object",
+                "string"
+            ],
+            "type": "string"
+        },
+        "TypedSchema": {
+            "title": "TypedSchema",
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                },
+                "type": {
+                    "$ref": "#/definitions/TypedSchemaType",
+                    "title": "type"
+                }
+            },
+            "required": [
+                "title",
+                "type"
+            ]
+        },
+        "RefSchema": {
+            "title": "RefSchema",
+            "type": "object",
+            "properties": {
+                "$ref": {
+                    "type": "string",
+                    "title": "$ref"
+                }
+            },
+            "required": [
+                "$ref"
+            ]
+        },
+        "OneOfSchema": {
+            "title": "OneOfSchema",
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                },
+                "oneOf": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/TypedSchema"
+                            },
+                            {
+                                "$ref": "#/definitions/RefSchema"
+                            },
+                            {
+                                "$ref": "#/definitions/OneOfSchema"
+                            }
+                        ]
+                    },
+                    "title": "oneOf"
+                }
+            },
+            "required": [
+                "oneOf",
+                "title"
+            ]
+        },
+        "Subschema": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/TypedSchema"
+                },
+                {
+                    "$ref": "#/definitions/RefSchema"
+                },
+                {
+                    "$ref": "#/definitions/OneOfSchema"
+                }
+            ]
+        },
+        "ArraySchema": {
+            "title": "ArraySchema",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "array"
+                    ],
+                    "title": "type"
+                },
+                "items": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/TypedSchema"
+                        },
+                        {
+                            "$ref": "#/definitions/RefSchema"
+                        },
+                        {
+                            "$ref": "#/definitions/OneOfSchema"
+                        }
+                    ],
+                    "title": "items"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "items",
+                "title",
+                "type"
+            ]
+        },
+        "BooleanSchema": {
+            "title": "BooleanSchema",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "boolean"
+                    ],
+                    "title": "type"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "title",
+                "type"
+            ]
+        },
+        "EntityFormatSchema": {
+            "title": "EntityFormatSchema",
+            "type": "object",
+            "properties": {
+                "format": {
+                    "type": "string",
+                    "enum": [
+                        "entity-schema"
+                    ],
+                    "title": "format"
+                }
+            },
+            "required": [
+                "format"
+            ]
+        },
+        "RootSchema": {
+            "title": "RootSchema",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "title": "id"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                },
+                "type": {
+                    "$ref": "#/definitions/TypedSchemaType",
+                    "title": "type"
+                }
+            },
+            "required": [
+                "id",
+                "title",
+                "type"
+            ]
+        },
+        "ObjectSchemaProperties": {
+            "title": "ObjectSchemaProperties",
+            "type": "object",
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/TypedSchema"
+                    },
+                    {
+                        "$ref": "#/definitions/RefSchema"
+                    },
+                    {
+                        "$ref": "#/definitions/OneOfSchema"
+                    }
+                ]
+            }
+        },
+        "ObjectSchema": {
+            "title": "ObjectSchema",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "object"
+                    ],
+                    "title": "type"
+                },
+                "properties": {
+                    "$ref": "#/definitions/ObjectSchemaProperties",
+                    "title": "properties"
+                },
+                "additionalProperties": {
+                    "type": "boolean",
+                    "enum": [
+                        false
+                    ],
+                    "title": "additionalProperties"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "title",
+                "type"
+            ]
+        },
+        "EntitySchema": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityFormatSchema"
+                },
+                {
+                    "$ref": "#/definitions/RootSchema"
+                },
+                {
+                    "$ref": "#/definitions/ObjectSchema"
+                }
+            ]
+        },
+        "ChildEntitySchema": {
+            "title": "ChildEntitySchema",
+            "type": "object",
+            "properties": {
+                "_esParentKey": {
+                    "type": "string",
+                    "title": "_esParentKey"
+                },
+                "format": {
+                    "type": "string",
+                    "enum": [
+                        "entity-schema"
+                    ],
+                    "title": "format"
+                },
+                "id": {
+                    "type": "string",
+                    "title": "id"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "object"
+                    ],
+                    "title": "type"
+                },
+                "properties": {
+                    "$ref": "#/definitions/ObjectSchemaProperties",
+                    "title": "properties"
+                },
+                "additionalProperties": {
+                    "type": "boolean",
+                    "enum": [
+                        false
+                    ],
+                    "title": "additionalProperties"
+                }
+            },
+            "required": [
+                "_esParentKey",
+                "additionalProperties",
+                "format",
+                "id",
+                "properties",
+                "title",
+                "type"
+            ]
+        },
+        "EntityReferenceSchema": {
+            "title": "EntityReferenceSchema",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "properties": {
+                        "entityId": {
+                            "$ref": "#/definitions/StringSchema",
+                            "title": "entityId"
+                        },
+                        "entityType": {
+                            "$ref": "#/definitions/ConstPropertySchema",
+                            "title": "entityType"
+                        }
+                    },
+                    "required": [
+                        "entityId",
+                        "entityType"
+                    ],
+                    "title": "properties"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "object"
+                    ],
+                    "title": "type"
+                },
+                "additionalProperties": {
+                    "type": "boolean",
+                    "enum": [
+                        false
+                    ],
+                    "title": "additionalProperties"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "title",
+                "type"
+            ]
+        },
+        "StringSchema": {
+            "title": "StringSchema",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "string"
+                    ],
+                    "title": "type"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "title",
+                "type"
+            ]
+        },
+        "ConstPropertySchema": {
+            "title": "ConstPropertySchema",
+            "type": "object",
+            "properties": {
+                "enum": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "enum"
+                },
+                "readOnly": {
+                    "type": "boolean",
+                    "enum": [
+                        true
+                    ],
+                    "title": "readOnly"
+                },
+                "default": {
+                    "type": "string",
+                    "title": "default"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "string"
+                    ],
+                    "title": "type"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "default",
+                "enum",
+                "readOnly",
+                "title",
+                "type"
+            ]
+        },
+        "EnumSchema": {
+            "title": "EnumSchema",
+            "type": "object",
+            "properties": {
+                "enum": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "enum"
+                },
+                "_esTitles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "_esTitles"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "string"
+                    ],
+                    "title": "type"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "_esTitles",
+                "enum",
+                "title",
+                "type"
+            ]
+        },
+        "IntegerSchema": {
+            "title": "IntegerSchema",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "integer"
+                    ],
+                    "title": "type"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "title",
+                "type"
+            ]
+        },
+        "NumberSchema": {
+            "title": "NumberSchema",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "number"
+                    ],
+                    "title": "type"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                }
+            },
+            "required": [
+                "title",
+                "type"
+            ]
+        },
+        "SecuritySchema": {
+            "title": "SecuritySchema",
+            "type": "object",
+            "properties": {
+                "_esSecurity": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "create"
+                        },
+                        "read": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "read"
+                        },
+                        "update": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "update"
+                        },
+                        "delete": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "delete"
+                        }
+                    },
+                    "required": [
+                        "create",
+                        "delete",
+                        "read",
+                        "update"
+                    ],
+                    "title": "_esSecurity"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
+                },
+                "type": {
+                    "$ref": "#/definitions/TypedSchemaType",
+                    "title": "type"
+                }
+            },
+            "required": [
+                "_esSecurity",
+                "title",
+                "type"
+            ]
+        }
+    }
+}

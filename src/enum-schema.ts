@@ -1,11 +1,7 @@
 import { is } from '@mojule/is'
-import { StringSchema, assertStringSchema } from './string-schema'
-import { isNonEmptyArray } from './util';
-
-export interface EnumSchema extends StringSchema {
-  enum: string[]
-  _esTitles: string[]
-}
+import { assertStringSchema } from './string-schema'
+import { isNonEmptyArray } from './util'
+import { EnumSchema } from './types'
 
 export const isEnumSchema = ( value ) : value is EnumSchema => {
   try {

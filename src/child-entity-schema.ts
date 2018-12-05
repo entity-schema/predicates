@@ -1,12 +1,9 @@
 import { is } from '@mojule/is'
-import { EntitySchema, assertEntitySchema } from './entity-schema'
+import { assertEntitySchema } from './entity-schema'
 import { isEntityReferenceSchema } from './entity-reference-schema'
 import { isRefSchema } from './ref-schema'
 import { isNonEmptyArray } from './util';
-
-export interface ChildEntitySchema extends EntitySchema {
-  _esParentKey: string
-}
+import { ChildEntitySchema } from './types'
 
 export const isChildEntitySchema = ( value ) : value is ChildEntitySchema => {
   try {

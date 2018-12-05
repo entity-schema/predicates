@@ -1,0 +1,8 @@
+{
+  "id": "http://workingspec.com/metaschema/type-array",
+  "title": "Array Type",
+  "type": "string",
+  "enum": [
+    "array"
+  ]
+}

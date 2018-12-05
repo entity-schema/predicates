@@ -1,12 +1,6 @@
-import { ObjectSchema, assertObjectSchema } from './object-schema'
+import { assertObjectSchema } from './object-schema'
 import { isNonEmptyString } from './util'
-import { RootSchema } from './root-schema'
-
-export interface EntityFormatSchema {
-  format: 'entity-schema'
-}
-
-export type EntitySchema = EntityFormatSchema & RootSchema & ObjectSchema
+import { EntitySchema } from './types'
 
 export const isEntitySchema = ( value ) : value is EntitySchema => {
   try {

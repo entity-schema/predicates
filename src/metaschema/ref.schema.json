@@ -1,0 +1,15 @@
+{
+  "id": "http://workingspec.com/metaschema/ref-schema",
+  "title": "Ref Schema",
+  "type": "object",
+  "properties": {
+    "$ref": {
+      "title": "$ref",
+      "type": "string",
+      "format": "uri-reference"
+    }
+  },
+  "required": [
+    "$ref"
+  ]
+}

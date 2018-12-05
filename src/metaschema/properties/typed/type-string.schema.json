@@ -1,0 +1,8 @@
+{
+  "id": "http://workingspec.com/metaschema/type-string",
+  "title": "String Type",
+  "type": "string",
+  "enum": [
+    "string"
+  ]
+}

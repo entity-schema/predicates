@@ -1,12 +1,7 @@
-import { JSONSchema4 } from 'json-schema'
 import { is } from '@mojule/is'
-import { Subschema, isSubschema } from './subschema'
+import { isSubschema } from './subschema'
 import { isNonEmptyString, isNonEmptyArray } from './util'
-
-export interface OneOfSchema extends JSONSchema4 {
-  title: string
-  oneOf: Subschema[]
-}
+import { OneOfSchema } from './types'
 
 export const isOneOfSchema = ( value ) : value is OneOfSchema => {
   try {

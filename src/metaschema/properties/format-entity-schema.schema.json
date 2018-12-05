@@ -1,0 +1,8 @@
+{
+  "id": "http://workingspec.com/metaschema/format-entity-schema",
+  "title": "format",
+  "type": "string",
+  "enum": [
+    "entity-schema"
+  ]
+}

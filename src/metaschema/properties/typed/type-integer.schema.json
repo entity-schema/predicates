@@ -1,0 +1,8 @@
+{
+  "id": "http://workingspec.com/metaschema/type-integer",
+  "title": "Integer Type",
+  "type": "string",
+  "enum": [
+    "integer"
+  ]
+}

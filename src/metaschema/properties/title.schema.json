@@ -1,0 +1,6 @@
+{
+  "id": "http://workingspec.com/metaschema/title",
+  "title": "Title",
+  "type": "string",
+  "minLength": 1
+}

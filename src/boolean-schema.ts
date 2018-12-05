@@ -1,8 +1,5 @@
-import { TypedSchema, assertTypedSchemaOf } from './typed-schema'
-
-export interface BooleanSchema extends TypedSchema {
-  type: 'boolean'
-}
+import { assertTypedSchemaOf } from './typed-schema'
+import { BooleanSchema } from './types'
 
 export const isBooleanSchema = ( value ): value is BooleanSchema => {
   try {

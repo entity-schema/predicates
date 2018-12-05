@@ -1,0 +1,39 @@
+{
+  "id": "http://workingspec.com/metaschema/entity-schema",
+  "title": "Entity Schema",
+  "type": "object",
+  "properties": {
+    "id": { "$ref": "http://workingspec.com/metaschema/id" },
+    "title": { "$ref": "http://workingspec.com/metaschema/title" },
+    "type": { "$ref": "http://workingspec.com/metaschema/type-object" },
+    "format": { "$ref": "http://workingspec.com/metaschema/format-entity-schema" },
+    "properties": {
+      "title": "Properties",
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "http://workingspec.com/metaschema/typed-schema"
+          },
+          {
+            "$ref": "http://workingspec.com/metaschema/ref-schema"
+          },
+          {
+            "$ref": "http://workingspec.com/metaschema/one-of-schema"
+          }
+        ],
+        "not": {
+          "$ref": "http://workingspec.com/metaschema/entity-schema"
+        }
+      }
+    },
+    "additionalProperties": {
+      "title": "Additional Properties",
+      "type": "boolean",
+      "enum": [ false ]
+    }
+  },
+  "required": [
+    "id", "title", "type", "format", "properties", "additionalProperties"
+  ]
+}

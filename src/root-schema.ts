@@ -1,9 +1,6 @@
-import { TypedSchema, assertTypedSchema } from './typed-schema'
+import { assertTypedSchema } from './typed-schema'
 import { isNonEmptyString } from './util'
-
-export interface RootSchema extends TypedSchema {
-  id: string
-}
+import { RootSchema } from './types'
 
 export const isRootSchema = ( value ) : value is RootSchema => {
   try {

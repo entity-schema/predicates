@@ -1,10 +1,6 @@
-import { JSONSchema4 } from 'json-schema'
 import { is } from '@mojule/is'
 import { isNonEmptyString } from './util'
-
-export interface RefSchema extends JSONSchema4 {
-  $ref: string
-}
+import { RefSchema } from './types'
 
 export const isRefSchema = ( value ) : value is RefSchema => {
   try {

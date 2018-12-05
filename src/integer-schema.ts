@@ -1,8 +1,5 @@
-import { TypedSchema, assertTypedSchemaOf } from './typed-schema'
-
-export interface IntegerSchema extends TypedSchema {
-  type: 'integer'
-}
+import { assertTypedSchemaOf } from './typed-schema'
+import { IntegerSchema } from './types'
 
 export const isIntegerSchema = ( value ): value is IntegerSchema => {
   try {

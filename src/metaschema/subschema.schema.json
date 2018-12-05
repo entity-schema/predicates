@@ -1,0 +1,15 @@
+{
+  "id": "http://workingspec.com/metaschema/subschema",
+  "title": "Subschema",
+  "anyOf": [
+    {
+      "$ref": "http://workingspec.com/metaschema/typed-schema"
+    },
+    {
+      "$ref": "http://workingspec.com/metaschema/ref-schema"
+    },
+    {
+      "$ref": "http://workingspec.com/metaschema/one-of-schema"
+    }
+  ]
+}

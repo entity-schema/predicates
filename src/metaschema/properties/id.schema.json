@@ -1,0 +1,6 @@
+{
+  "id": "http://workingspec.com/metaschema/id",
+  "title": "ID",
+  "type": "string",
+  "format": "uri-reference"
+}

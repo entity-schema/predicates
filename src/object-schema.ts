@@ -1,17 +1,8 @@
 import { is } from '@mojule/is'
-import { Subschema, assertSubschema } from './subschema'
+import { assertSubschema } from './subschema'
 import { isEntitySchema } from './entity-schema'
-import { TypedSchema, assertTypedSchemaOf } from './typed-schema'
-
-export interface ObjectSchemaProperties {
-  [ name: string ]: Subschema
-}
-
-export interface ObjectSchema extends TypedSchema {
-  type: 'object'
-  properties: ObjectSchemaProperties
-  additionalProperties: false
-}
+import { assertTypedSchemaOf } from './typed-schema'
+import { ObjectSchema } from './types'
 
 export const isObjectSchema = ( value ) : value is ObjectSchema => {
   try {

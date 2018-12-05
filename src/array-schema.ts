@@ -1,10 +1,6 @@
-import { Subschema, assertSubschema } from './subschema'
-import { TypedSchema, assertTypedSchemaOf } from './typed-schema'
-
-export interface ArraySchema extends TypedSchema {
-  type: 'array'
-  items: Subschema
-}
+import { ArraySchema } from './types'
+import { assertTypedSchemaOf } from './typed-schema'
+import { assertSubschema } from './subschema'
 
 export const isArraySchema = ( value ): value is ArraySchema => {
   try {

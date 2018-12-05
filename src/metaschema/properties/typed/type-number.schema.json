@@ -1,0 +1,8 @@
+{
+  "id": "http://workingspec.com/metaschema/type-number",
+  "title": "Number Type",
+  "type": "string",
+  "enum": [
+    "number"
+  ]
+}

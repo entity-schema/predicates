@@ -1,15 +1,7 @@
 import { is } from '@mojule/is'
-import { TypedSchema, assertTypedSchema } from './typed-schema'
-import { isNonEmptyString, isNonEmptyArray } from './util';
-
-export interface SecuritySchema extends TypedSchema {
-  _esSecurity: {
-    create: string[]
-    read: string[]
-    update: string[]
-    delete: string[]
-  }
-}
+import { assertTypedSchema } from './typed-schema'
+import { isNonEmptyString, isNonEmptyArray } from './util'
+import { SecuritySchema } from './types'
 
 export const isSecuritySchema =
   ( value ): value is SecuritySchema => {

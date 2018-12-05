@@ -1,11 +1,6 @@
 import { is } from '@mojule/is'
-import { StringSchema, assertStringSchema } from './string-schema'
-
-export interface ConstPropertySchema extends StringSchema {
-  enum: string[],
-  readOnly: true,
-  default: string
-}
+import { assertStringSchema } from './string-schema'
+import { ConstPropertySchema } from './types'
 
 export const isConstPropertySchema =
   ( value ) : value is ConstPropertySchema => {

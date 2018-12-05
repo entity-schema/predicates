@@ -1,8 +1,5 @@
-import { TypedSchema, assertTypedSchemaOf } from './typed-schema'
-
-export interface NumberSchema extends TypedSchema {
-  type: 'number'
-}
+import { assertTypedSchemaOf } from './typed-schema'
+import { NumberSchema } from './types'
 
 export const isNumberSchema = ( value ): value is NumberSchema => {
   try {

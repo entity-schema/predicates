@@ -1,0 +1,17 @@
+{
+  "id": "http://workingspec.com/metaschema/array-schema",
+  "title": "Array Schema",
+  "type": "object",
+  "properties": {
+    "title": { "$ref": "http://workingspec.com/metaschema/title" },
+    "type": { "$ref": "http://workingspec.com/metaschema/type-array" },
+    "items": {
+      "title": "Items",
+      "type": "array",
+      "items": {
+        "$ref": "http://workingspec.com/metaschema/subschema"
+      }
+    }
+  },
+  "required": [ "title", "type", "items" ]
+}

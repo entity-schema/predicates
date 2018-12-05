@@ -1,0 +1,10 @@
+{
+  "id": "http://workingspec.com/metaschema/typed-schema",
+  "title": "Typed Schema",
+  "type": "object",
+  "properties": {
+    "title": { "$ref": "http://workingspec.com/metaschema/title" },
+    "type": { "$ref": "http://workingspec.com/metaschema/type" }
+  },
+  "required": [ "title", "type" ]
+}

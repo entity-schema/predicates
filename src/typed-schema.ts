@@ -1,15 +1,6 @@
 import { is } from '@mojule/is'
-import { JSONSchema4 } from 'json-schema'
 import { isNonEmptyString } from './util'
-
-export type TypedSchemaType = (
-  'string' | 'number' | 'integer' | 'boolean' | 'object' | 'array'
-)
-
-export interface TypedSchema extends JSONSchema4 {
-  title: string,
-  type: TypedSchemaType
-}
+import { TypedSchemaType, TypedSchema } from './types'
 
 const schemaTypes: TypedSchemaType[] = [
   'string', 'number', 'integer', 'boolean', 'object', 'array'

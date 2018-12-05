@@ -1,0 +1,8 @@
+{
+  "id": "http://workingspec.com/metaschema/type-boolean",
+  "title": "Boolean Type",
+  "type": "string",
+  "enum": [
+    "boolean"
+  ]
+}

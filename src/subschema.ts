@@ -1,8 +1,7 @@
-import { RefSchema, isRefSchema } from './ref-schema'
-import { TypedSchema, isTypedSchema } from './typed-schema'
-import { OneOfSchema, isOneOfSchema } from './oneof-schema'
-
-export type Subschema = RefSchema | TypedSchema | OneOfSchema
+import { isRefSchema } from './ref-schema'
+import { isTypedSchema } from './typed-schema'
+import { isOneOfSchema } from './oneof-schema'
+import { Subschema } from './types'
 
 export const isSubschema = ( value ) : value is Subschema => {
   if( isRefSchema( value ) ) return true
