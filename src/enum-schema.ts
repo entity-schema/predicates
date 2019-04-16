@@ -22,14 +22,14 @@ export const assertEnumSchema = ( enumSchema, name = 'EnumSchema' ) => {
   if ( !enumSchema.enum.every( is.string ) )
     throw TypeError( `${ name }.enum should be an array of strings` )
 
-  if ( !isNonEmptyArray<string>( enumSchema._esTitles ) )
-    throw TypeError( `${ name }._esTitles should be a non-empty array` )
+  if ( !isNonEmptyArray<string>( enumSchema._enumTitles ) )
+    throw TypeError( `${ name }._enumTitles should be a non-empty array` )
 
-  if ( !enumSchema._esTitles.every( is.string ) )
-    throw TypeError( `${ name }._esTitles should be an array of strings` )
+  if ( !enumSchema._enumTitles.every( is.string ) )
+    throw TypeError( `${ name }._enumTitles should be an array of strings` )
 
-  if ( enumSchema.enum.length !== enumSchema._esTitles.length )
+  if ( enumSchema.enum.length !== enumSchema._enumTitles.length )
     throw TypeError(
-      `${ name }.enum and ${ name }._esTitles should be the same length`
+      `${ name }.enum and ${ name }._enumTitles should be the same length`
     )
 }

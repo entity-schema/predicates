@@ -3,7 +3,7 @@ export declare const passSchemaMap: {
         "title": string;
         "type": string;
         "enum": string[];
-        "_esTitles": string[];
+        "_enumTitles": string[];
     };
     numberPass: {
         "title": string;

@@ -1,7 +1,3 @@
-import { StringSchema } from './string-schema';
-export interface EnumSchema extends StringSchema {
-    enum: string[];
-    _esTitles: string[];
-}
+import { EnumSchema } from './types';
 export declare const isEnumSchema: (value: any) => value is EnumSchema;
 export declare const assertEnumSchema: (enumSchema: any, name?: string) => void;

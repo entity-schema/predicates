@@ -161,7 +161,7 @@ export declare const failSchemaMap: {
             "title": string;
             "description": string;
             "type": string;
-            "_esTitles": string[];
+            "_enumTitles": string[];
             "_expect": string;
             "enum"?: undefined;
         } | {
@@ -169,7 +169,7 @@ export declare const failSchemaMap: {
             "description": string;
             "type": string;
             "enum": number[];
-            "_esTitles": string[];
+            "_enumTitles": string[];
             "_expect": string;
         } | {
             "title": string;
@@ -177,20 +177,20 @@ export declare const failSchemaMap: {
             "type": string;
             "enum": string[];
             "_expect": string;
-            "_esTitles"?: undefined;
+            "_enumTitles"?: undefined;
         } | {
             "title": string;
             "description": string;
             "type": string;
             "enum": string[];
-            "_esTitles": number[];
+            "_enumTitles": number[];
             "_expect": string;
         } | {
             "title": string;
             "description": string;
             "type": string;
             "enum": string[];
-            "_esTitles": string[];
+            "_enumTitles": string[];
             "_expect": string;
         })[];
     };

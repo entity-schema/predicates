@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const subschema_1 = require("./subschema");
 const typed_schema_1 = require("./typed-schema");
+const subschema_1 = require("./subschema");
 exports.isArraySchema = (value) => {
     try {
         exports.assertArraySchema(value);

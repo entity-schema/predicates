@@ -1,11 +1,3 @@
-import { ObjectSchema } from './object-schema';
-import { StringSchema } from './string-schema';
-import { ConstPropertySchema } from './const-property-schema';
-export interface EntityReferenceSchema extends ObjectSchema {
-    properties: {
-        entityId: StringSchema;
-        entityType: ConstPropertySchema;
-    };
-}
+import { EntityReferenceSchema } from './types';
 export declare const isEntityReferenceSchema: (value: any) => value is EntityReferenceSchema;
 export declare const assertEntityReferenceSchema: (entityReferenceSchema: any, name?: string) => void;

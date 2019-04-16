@@ -1,4 +1,5 @@
-import { TypedSchema, assertTypedSchema } from './typed-schema'
+import { assertTypedSchema } from './typed-schema'
+import { TypedSchema } from './types'
 
 export interface UniquePropertySchema extends TypedSchema {
   _esUnique: true

@@ -72,7 +72,7 @@ export interface ConstPropertySchema extends StringSchema {
 
 export interface EnumSchema extends StringSchema {
   enum: string[]
-  _esTitles: string[]
+  _enumTitles: string[]
 }
 
 export interface IntegerSchema extends TypedSchema {

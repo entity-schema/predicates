@@ -422,12 +422,12 @@
                     },
                     "title": "enum"
                 },
-                "_esTitles": {
+                "_enumTitles": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "title": "_esTitles"
+                    "title": "_enumTitles"
                 },
                 "type": {
                     "type": "string",
@@ -442,7 +442,7 @@
                 }
             },
             "required": [
-                "_esTitles",
+                "_enumTitles",
                 "enum",
                 "title",
                 "type"

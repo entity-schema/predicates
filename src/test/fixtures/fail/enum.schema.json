@@ -6,7 +6,7 @@
       "title": "No Enum",
       "description": "no enum",
       "type": "string",
-      "_esTitles": [ "Foo", "Bar" ],
+      "_enumTitles": [ "Foo", "Bar" ],
       "_expect": "EnumSchema.enum should be a non-empty array"
     },
     {
@@ -14,31 +14,31 @@
       "description": "not strings in enum",
       "type": "string",
       "enum": [ 1, 2 ],
-      "_esTitles": [ "Foo", "Bar" ],
+      "_enumTitles": [ "Foo", "Bar" ],
       "_expect": "EnumSchema.enum should be an array of strings"
     },
     {
       "title": "No Titles",
-      "description": "no _esTitles",
+      "description": "no _enumTitles",
       "type": "string",
       "enum": [ "foo", "bar" ],
-      "_expect": "EnumSchema._esTitles should be a non-empty array"
+      "_expect": "EnumSchema._enumTitles should be a non-empty array"
     },
     {
       "title": "Titles not Strings",
-      "description": "not strings in _esTitles",
+      "description": "not strings in _enumTitles",
       "type": "string",
       "enum": [ "foo", "bar" ],
-      "_esTitles": [ 1, 2 ],
-      "_expect": "EnumSchema._esTitles should be an array of strings"
+      "_enumTitles": [ 1, 2 ],
+      "_expect": "EnumSchema._enumTitles should be an array of strings"
     },
     {
       "title": "Wrong Length",
-      "description": "enum length does not match _esTitles length",
+      "description": "enum length does not match _enumTitles length",
       "type": "string",
       "enum": [ "foo", "bar" ],
-      "_esTitles": [ "Foo" ],
-      "_expect": "EnumSchema.enum and EnumSchema._esTitles should be the same length"
+      "_enumTitles": [ "Foo" ],
+      "_expect": "EnumSchema.enum and EnumSchema._enumTitles should be the same length"
     }
   ]
 }

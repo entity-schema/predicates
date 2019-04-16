@@ -1,12 +1,4 @@
-import { TypedSchema } from './typed-schema';
-export interface SecuritySchema extends TypedSchema {
-    _esSecurity: {
-        create: string[];
-        read: string[];
-        update: string[];
-        delete: string[];
-    };
-}
+import { SecuritySchema } from './types';
 export declare const isSecuritySchema: (value: any) => value is SecuritySchema;
 export declare const assertSecuritySchema: (securitySchema: any, name?: string) => void;
 export declare const assertSecuritySchemaRoles: (securitySchema: any, roleName: string, name?: string) => void;

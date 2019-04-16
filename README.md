@@ -401,7 +401,7 @@ A schema representing an enum of strings
 
 The `enum` keyword should list possible values
 
-It should have a property `_esTitles` keyword that lists human readable
+It should have a property `_enumTitles` keyword that lists human readable
 titles for the enums - this is mapped by index to the `enum` array, so they
 must have the same length
 
@@ -412,7 +412,7 @@ must have the same length
   "enum": [
     "foo", "bar", "baz"
   ],
-  "_esTitles": [
+  "_enumTitles": [
     "Foo", "Bar", "Baz"
   ]
 }

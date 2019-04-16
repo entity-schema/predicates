@@ -4,7 +4,7 @@
   "enum": [
     "foo", "bar"
   ],
-  "_esTitles": [
+  "_enumTitles": [
     "Foo", "Bar"
   ]
 }
